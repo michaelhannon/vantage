@@ -61,11 +61,10 @@ input:focus,textarea:focus,select:focus{outline:none}
 <body>
 <div id="root"></div>
 
-<!-- NOTE: Replace "YOUR_ANTHROPIC_API_KEY" below with your actual key.
-     Never expose real API keys in client-side code for production use.
-     Use a backend proxy for production deployments. -->
 <script>
-  const ANTHROPIC_API_KEY = "YOUR_ANTHROPIC_API_KEY";
+  // Points to the local proxy server (server.js).
+  // Change this if you deploy the server elsewhere.
+  const PROXY_BASE = "https://vantage-production-2d1d.up.railway.app";
 </script>
 
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -90,17 +89,21 @@ const store={
   set:(key,val)=>{try{localStorage.setItem(key,val);return true;}catch{return false;}},
 };
 
-// ── Anthropic API helper ─────────────────────────────────────────────────────
+// ── Admin credentials (change these!) ────────────────────────────────────────
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "vantage2026";
+
+// ── Anthropic API helper — routes through local proxy server ─────────────────
 const claude=async(messages,system="")=>{
   const body={model:"claude-sonnet-4-20250514",max_tokens:1000,messages};
   if(system) body.system=system;
-  const r=await fetch("https://api.anthropic.com/v1/messages",{
+  const r=await fetch(`${PROXY_BASE}/api/anthropic/messages`,{
     method:"POST",
-    headers:{"Content-Type":"application/json","x-api-key":ANTHROPIC_API_KEY,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+    headers:{"Content-Type":"application/json"},
     body:JSON.stringify(body)
   });
   const d=await r.json();
-  if(d.error) throw new Error(d.error.message);
+  if(d.error) throw new Error(d.error.message||JSON.stringify(d.error));
   return d.content?.[0]?.text||"";
 };
 
@@ -183,6 +186,11 @@ function AuthScreen({onAuth}){
         store.set('vantage_users',JSON.stringify(users));
         onAuth({username:user,...users[user]});
       } else {
+        // Check admin credentials first
+        if(user===ADMIN_USER&&pass===ADMIN_PASS){
+          onAuth({username:ADMIN_USER,name:'Admin',balance:0,bets:0,wins:0,isAdmin:true});
+          setLoading(false);return;
+        }
         if(!users[user]||users[user].pass!==pass){setErr('Invalid credentials');setLoading(false);return;}
         onAuth({username:user,...users[user]});
       }
@@ -216,7 +224,7 @@ function AuthScreen({onAuth}){
       <button className="auth-btn" onClick={submit} disabled={loading}>
         {loading?<span style={{animation:'pulse 1s infinite'}}>...</span>:mode==='login'?'Sign In →':'Create Account →'}
       </button>
-      <p style={{textAlign:'center',color:'#3a3a60',fontSize:11,marginTop:12}}>Demo: user <span style={{fontFamily:'DM Mono',color:'#5a5a80'}}>demo</span> / pass <span style={{fontFamily:'DM Mono',color:'#5a5a80'}}>demo</span></p>
+      <p style={{textAlign:'center',color:'#3a3a60',fontSize:11,marginTop:12}}>Try demo: <span style={{fontFamily:'DM Mono',color:'#00e87a'}}>demo</span> / <span style={{fontFamily:'DM Mono',color:'#00e87a'}}>demo</span> — or register your own account</p>
     </div>
   </div>;
 }
@@ -345,6 +353,109 @@ function Leaderboard({currentUser}){
   </>;
 }
 
+
+// ── Admin Panel ───────────────────────────────────────────────────────────────
+function AdminPanel({markets,setMarkets,onResolve,resolvingId}){
+  const [users,setUsers]=useState({});
+  const [editBal,setEditBal]=useState({});
+  const [editPass,setEditPass]=useState({});
+  const [msg,setMsg]=useState('');
+
+  useEffect(()=>{
+    try{const r=store.get('vantage_users');if(r) setUsers(JSON.parse(r.value));}catch(e){}
+  },[]);
+
+  const saveUsers=u=>{
+    store.set('vantage_users',JSON.stringify(u));
+    setUsers({...u});
+  };
+
+  const adjustBalance=(un,amt)=>{
+    const a=parseFloat(amt);if(isNaN(a)) return;
+    const u={...users};u[un]={...u[un],balance:Math.max(0,parseFloat(((u[un].balance||0)+a).toFixed(2)))};
+    saveUsers(u);setMsg(`Updated ${un} balance`);setTimeout(()=>setMsg(''),2000);
+  };
+
+  const resetPass=(un,np)=>{
+    if(!np.trim()) return;
+    const u={...users};u[un]={...u[un],pass:np};
+    saveUsers(u);setEditPass(p=>({...p,[un]:''}));setMsg(`Reset ${un} password`);setTimeout(()=>setMsg(''),2000);
+  };
+
+  const deleteUser=un=>{
+    const u={...users};delete u[un];
+    saveUsers(u);setMsg(`Deleted ${un}`);setTimeout(()=>setMsg(''),2000);
+  };
+
+  const deleteMarket=id=>{
+    setMarkets(prev=>prev.filter(m=>m.id!==id));
+    setMsg('Market deleted');setTimeout(()=>setMsg(''),2000);
+  };
+
+  const totalVol=markets.reduce((s,m)=>s+m.vol,0);
+  const totalUsers=Object.keys(users).length;
+  const totalBets=Object.values(users).reduce((s,u)=>s+(u.bets||0),0);
+  const totalBalance=Object.values(users).reduce((s,u)=>s+(u.balance||0),0);
+
+  return<>
+    {msg&&<div style={{background:'#071510',border:'1px solid #00e87a44',borderRadius:8,padding:'8px 14px',marginBottom:16,color:'#00e87a',fontFamily:'DM Mono',fontSize:12}}>{msg}</div>}
+
+    {/* Platform Stats */}
+    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(120px,1fr))',gap:10,marginBottom:24}}>
+      {[['USERS',totalUsers,'#b040ff'],['TOTAL BETS',totalBets,'#4aa8ff'],['MARKET VOL',`$${(totalVol/1000).toFixed(0)}K`,'#f0c040'],['PLAYER FUNDS',`$${totalBalance.toFixed(0)}`,'#00e87a'],['OPEN MARKETS',markets.filter(m=>m.status==='open').length,'#30d8c0'],['RESOLVED',markets.filter(m=>m.status==='resolved').length,'#5a5a80']].map(([l,v,c])=>(
+        <div key={l} style={{background:'#0e0e1c',border:'1px solid #1a1a2e',borderRadius:8,padding:'12px',textAlign:'center'}}>
+          <div style={{color:'#3a3a60',fontSize:9,letterSpacing:'.1em',marginBottom:4}}>{l}</div>
+          <div style={{fontFamily:'DM Mono',fontSize:15,fontWeight:500,color:c}}>{v}</div>
+        </div>
+      ))}
+    </div>
+
+    {/* User Management */}
+    <div style={{marginBottom:24}}>
+      <div style={{color:'#b040ff',fontSize:11,letterSpacing:'.1em',fontWeight:700,marginBottom:12}}>USER MANAGEMENT</div>
+      {Object.keys(users).length===0?<div style={{color:'#2a2a48',fontSize:13}}>No users yet.</div>:
+      Object.entries(users).map(([un,u])=>(
+        <div key={un} style={{background:'#0e0e1c',border:'1px solid #1a1a2e',borderRadius:10,padding:'12px 14px',marginBottom:8}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+            <div>
+              <span style={{fontWeight:700,fontSize:13}}>{u.name||un}</span>
+              <span style={{fontFamily:'DM Mono',color:'#4a4a6a',fontSize:11,marginLeft:8}}>@{un}</span>
+            </div>
+            <div style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap'}}>
+              <span style={{fontFamily:'DM Mono',color:'#00e87a',fontSize:13}}>${(u.balance||0).toFixed(2)}</span>
+              <span style={{color:'#3a3a60',fontSize:11}}>{u.bets||0} bets · {u.wins||0} wins</span>
+            </div>
+          </div>
+          <div style={{display:'flex',gap:6,marginTop:10,flexWrap:'wrap'}}>
+            <input placeholder="Adjust $" value={editBal[un]||''} onChange={e=>setEditBal(b=>({...b,[un]:e.target.value}))} style={{background:'#07070f',border:'1px solid #2a2a48',borderRadius:6,color:'#ddddf0',padding:'5px 10px',fontSize:12,fontFamily:'DM Mono',width:90}}/>
+            <button onClick={()=>adjustBalance(un,editBal[un]||'0')} style={{background:'transparent',border:'1px solid #00e87a44',borderRadius:6,color:'#00e87a',padding:'5px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>Apply</button>
+            <input placeholder="New password" type="password" value={editPass[un]||''} onChange={e=>setEditPass(p=>({...p,[un]:e.target.value}))} style={{background:'#07070f',border:'1px solid #2a2a48',borderRadius:6,color:'#ddddf0',padding:'5px 10px',fontSize:12,fontFamily:'DM Mono',width:120}}/>
+            <button onClick={()=>resetPass(un,editPass[un]||'')} style={{background:'transparent',border:'1px solid #4aa8ff44',borderRadius:6,color:'#4aa8ff',padding:'5px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>Reset Pass</button>
+            <button onClick={()=>{if(window.confirm(`Delete user ${un}?`)) deleteUser(un);}} style={{background:'transparent',border:'1px solid #ff335544',borderRadius:6,color:'#ff3355',padding:'5px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>Delete</button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Market Management */}
+    <div>
+      <div style={{color:'#b040ff',fontSize:11,letterSpacing:'.1em',fontWeight:700,marginBottom:12}}>MARKET MANAGEMENT</div>
+      {markets.map(m=>(
+        <div key={m.id} style={{background:'#0e0e1c',border:'1px solid #1a1a2e',borderRadius:10,padding:'12px 14px',marginBottom:8,display:'flex',justifyContent:'space-between',alignItems:'center',gap:10,flexWrap:'wrap'}}>
+          <div style={{flex:1,minWidth:200}}>
+            <div style={{marginBottom:4}}><Badge cat={m.category}/><span style={{marginLeft:8,fontSize:10,fontFamily:'DM Mono',color:m.status==='open'?'#00e87a':'#5a5a80'}}>{m.status.toUpperCase()}</span></div>
+            <p style={{fontSize:12,lineHeight:1.4,fontWeight:600}}>{m.title}</p>
+          </div>
+          <div style={{display:'flex',gap:6}}>
+            {m.status==='open'&&<button onClick={()=>onResolve(m)} disabled={resolvingId===m.id} style={{background:'transparent',border:'1px solid #f0c04044',borderRadius:6,color:'#f0c040',padding:'6px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>{resolvingId===m.id?'…':'⚡ Resolve'}</button>}
+            <button onClick={()=>{if(window.confirm('Delete this market?')) deleteMarket(m.id);}} style={{background:'transparent',border:'1px solid #ff335544',borderRadius:6,color:'#ff3355',padding:'6px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>Delete</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </>;
+}
+
 function App(){
   const [user,setUser]=useState(null);
   const [markets,setMarkets]=useState(INIT_MARKETS);
@@ -361,6 +472,14 @@ function App(){
   const [notif,setNotif]=useState(null);
   const [positions,setPositions]=useState({});
   const notifTimer=useRef(null);
+
+  // Seed demo account on first load
+  useEffect(()=>{
+    try{
+      const r=store.get("vantage_users");let us={};if(r) us=JSON.parse(r.value);
+      if(!us.demo){us.demo={name:"Demo Player",pass:"demo",balance:2340.50,bets:18,wins:11,totalPnl:340.50};store.set("vantage_users",JSON.stringify(us));}
+    }catch(e){}
+  },[]);
 
   const notify=(msg,type="ok")=>{
     if(notifTimer.current) clearTimeout(notifTimer.current);
@@ -489,10 +608,9 @@ function App(){
         </div>
         <div style={{display:'flex',alignItems:'center',gap:10}}>
           <div style={{textAlign:'right'}}>
-            <div style={{color:'#3a3a60',fontSize:9,letterSpacing:'.1em'}}>BALANCE</div>
-            <div style={{color:'#00e87a',fontFamily:'DM Mono',fontWeight:500,fontSize:14}}>${user.balance.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+            {user.isAdmin?<div style={{color:'#b040ff',fontFamily:'DM Mono',fontWeight:700,fontSize:12,letterSpacing:'.08em'}}>ADMIN</div>:<><div style={{color:'#3a3a60',fontSize:9,letterSpacing:'.1em'}}>BALANCE</div><div style={{color:'#00e87a',fontFamily:'DM Mono',fontWeight:500,fontSize:14}}>${user.balance.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div></>}
           </div>
-          <div style={{width:32,height:32,borderRadius:'50%',background:'#071510',border:'1px solid #00e87a33',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,color:'#00e87a'}}>{(user.name||user.username).substring(0,2).toUpperCase()}</div>
+          <div style={{width:32,height:32,borderRadius:'50%',background:user.isAdmin?'#12001e':'#071510',border:`1px solid ${user.isAdmin?'#b040ff55':'#00e87a33'}`,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,color:user.isAdmin?'#b040ff':'#00e87a'}}>{user.isAdmin?'⬡':(user.name||user.username).substring(0,2).toUpperCase()}</div>
           <button onClick={()=>setUser(null)} style={{background:'none',border:'1px solid #1a1a2e',borderRadius:6,color:'#3a3a60',padding:'4px 8px',fontSize:11}}>↩</button>
         </div>
       </div>
@@ -500,7 +618,7 @@ function App(){
 
     {/* TABS */}
     <div style={{borderBottom:'1px solid #131328',padding:'0 16px',display:'flex',maxWidth:1132,margin:'0 auto',overflowX:'auto'}}>
-      {[["markets","◈ Markets"],["portfolio","◉ Portfolio"],["leaderboard","⬆ Leaders"],["resolved","✓ Resolved"]].map(([k,l])=>(
+      {[["markets","◈ Markets"],["portfolio","◉ Portfolio"],["leaderboard","⬆ Leaders"],["resolved","✓ Resolved"],...(user.isAdmin?[["admin","⬡ Admin"]]:[])].map(([k,l])=>(
         <button key={k} className={`tab${tab===k?" active":""}`} onClick={()=>setTab(k)}>{l}</button>
       ))}
     </div>
