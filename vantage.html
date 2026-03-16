@@ -166,126 +166,146 @@ function AuthScreen({onAuth}){
   var [pwd,setPwd] = React.useState("");
   var [dname,setDname] = React.useState("");
   var [err,setErr] = React.useState("");
+  var [loading,setLoading] = React.useState(false);
 
   function handleLogin(){
     var u = uname.trim();
     var p = pwd.trim();
-    if(u === "" || p === ""){
-      setErr("Please enter username and password");
-      return;
-    }
-    if(u === "admin" && p === "vantage2026"){
-      onAuth({username:"admin", name:"Admin", balance:0, bets:0, wins:0, isAdmin:true});
-      return;
-    }
-    if(u === "demo" && p === "demo"){
-      onAuth({username:"demo", name:"Demo Player", balance:2340.50, bets:18, wins:11, isAdmin:false});
-      return;
-    }
+    if(u === "" || p === ""){ setErr("Enter username and password"); return; }
+    if(u === "admin" && p === "vantage2026"){ onAuth({username:"admin",name:"Admin",balance:0,bets:0,wins:0,isAdmin:true}); return; }
+    if(u === "demo" && p === "demo"){ onAuth({username:"demo",name:"Demo Player",balance:2340.50,bets:18,wins:11,isAdmin:false}); return; }
     try {
       var stored = localStorage.getItem("vantage_users");
       var users = stored ? JSON.parse(stored) : {};
-      if(!users[u] || users[u].pass !== p){
-        setErr("Invalid username or password");
-        return;
-      }
+      if(!users[u] || users[u].pass !== p){ setErr("Invalid username or password"); return; }
       onAuth(Object.assign({}, users[u], {username:u, isAdmin:false}));
-    } catch(e) {
-      setErr("Login error");
-    }
+    } catch(e) { setErr("Login error"); }
   }
 
   function handleRegister(){
-    var u = uname.trim();
-    var p = pwd.trim();
-    var n = dname.trim();
-    if(u === "" || p === "" || n === ""){
-      setErr("Please fill in all fields");
-      return;
-    }
-    if(u === "admin" || u === "demo"){
-      setErr("That username is reserved");
-      return;
-    }
+    var u = uname.trim(); var p = pwd.trim(); var n = dname.trim();
+    if(u === "" || p === "" || n === ""){ setErr("Please fill in all fields"); return; }
+    if(u === "admin" || u === "demo"){ setErr("That username is reserved"); return; }
     try {
       var stored = localStorage.getItem("vantage_users");
       var users = stored ? JSON.parse(stored) : {};
-      if(users[u]){
-        setErr("Username already taken");
-        return;
-      }
+      if(users[u]){ setErr("Username already taken"); return; }
       users[u] = {name:n, pass:p, balance:1000, bets:0, wins:0, totalPnl:0};
       localStorage.setItem("vantage_users", JSON.stringify(users));
       onAuth(Object.assign({}, users[u], {username:u, isAdmin:false}));
-    } catch(e) {
-      setErr("Registration error");
-    }
+    } catch(e) { setErr("Registration error"); }
   }
 
   function handleClick(){
     setErr("");
-    if(mode === "login"){
-      handleLogin();
-    } else {
-      handleRegister();
-    }
+    if(mode === "login"){ handleLogin(); } else { handleRegister(); }
   }
 
   return (
-    <div style={{maxWidth:380, margin:"60px auto", padding:20}}>
-      <div style={{textAlign:"center", marginBottom:32}}>
-        <div style={{color:"#00e87a", fontSize:32, marginBottom:8}}>◈</div>
-        <div style={{fontWeight:800, fontSize:22, letterSpacing:".14em"}}>VANTAGE</div>
-        <div style={{color:"#3a3a60", fontSize:10, letterSpacing:".14em", marginTop:2}}>PREDICTION MARKETS</div>
-      </div>
-      <div className="modal" style={{margin:0, maxWidth:"100%"}}>
-        <div style={{display:"flex", gap:8, marginBottom:20}}>
-          <button
-            onClick={function(){ setMode("login"); setErr(""); }}
-            style={{flex:1, padding:"9px", borderRadius:8, border:"1px solid "+(mode==="login"?"#00e87a44":"#1a1a2e"), background:mode==="login"?"#071510":"transparent", color:mode==="login"?"#00e87a":"#4a4a6a", fontFamily:"Syne", fontWeight:700, fontSize:12}}>
-            Sign In
-          </button>
-          <button
-            onClick={function(){ setMode("register"); setErr(""); }}
-            style={{flex:1, padding:"9px", borderRadius:8, border:"1px solid "+(mode==="register"?"#00e87a44":"#1a1a2e"), background:mode==="register"?"#071510":"transparent", color:mode==="register"?"#00e87a":"#4a4a6a", fontFamily:"Syne", fontWeight:700, fontSize:12}}>
-            Register
-          </button>
-        </div>
+    <div style={{minHeight:"100vh",display:"flex",position:"relative",overflow:"hidden"}}>
+      {/* Animated background grid */}
+      <div style={{position:"absolute",inset:0,backgroundImage:"linear-gradient(#00e87a08 1px,transparent 1px),linear-gradient(90deg,#00e87a08 1px,transparent 1px)",backgroundSize:"40px 40px",zIndex:0}}/>
+      {/* Glow orbs */}
+      <div style={{position:"absolute",top:"20%",left:"15%",width:300,height:300,borderRadius:"50%",background:"radial-gradient(circle,#00e87a12,transparent 70%)",zIndex:0}}/>
+      <div style={{position:"absolute",bottom:"20%",right:"15%",width:250,height:250,borderRadius:"50%",background:"radial-gradient(circle,#b040ff10,transparent 70%)",zIndex:0}}/>
 
-        {mode === "register" && (
-          <div style={{marginBottom:12}}>
-            <label className="field-label">DISPLAY NAME</label>
-            <input className="auth-input" placeholder="SharpBettor99" value={dname} onChange={function(e){ setDname(e.target.value); }}/>
+      {/* Left panel */}
+      <div style={{flex:1,display:"flex",flexDirection:"column",justifyContent:"center",padding:"60px",position:"relative",zIndex:1}}>
+        <div style={{marginBottom:48}}>
+          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:32}}>
+            <div style={{color:"#00e87a",fontSize:28}}>◈</div>
+            <div>
+              <div style={{fontWeight:800,fontSize:16,letterSpacing:".16em"}}>VANTAGE</div>
+              <div style={{color:"#252540",fontSize:9,letterSpacing:".12em"}}>PREDICTION MARKETS</div>
+            </div>
           </div>
-        )}
-
-        <div style={{marginBottom:12}}>
-          <label className="field-label">USERNAME</label>
-          <input className="auth-input" placeholder="username" value={uname}
-            onChange={function(e){ setUname(e.target.value); }}
-            onKeyDown={function(e){ if(e.key==="Enter") handleClick(); }}/>
+          <h1 style={{fontSize:42,fontWeight:800,lineHeight:1.15,marginBottom:16,letterSpacing:"-.01em"}}>
+            <span style={{color:"#ddddf0"}}>Predict.</span><br/>
+            <span style={{color:"#00e87a"}}>Win.</span><br/>
+            <span style={{color:"#ddddf0"}}>Repeat.</span>
+          </h1>
+          <p style={{color:"#4a4a6a",fontSize:14,lineHeight:1.7,maxWidth:340}}>
+            Bet on anything with AI-powered markets. Sports, politics, pop culture — if it can happen, you can trade it.
+          </p>
         </div>
-
-        <div style={{marginBottom:16}}>
-          <label className="field-label">PASSWORD</label>
-          <input className="auth-input" type="password" placeholder="password" value={pwd}
-            onChange={function(e){ setPwd(e.target.value); }}
-            onKeyDown={function(e){ if(e.key==="Enter") handleClick(); }}/>
+        {/* Stats */}
+        <div style={{display:"flex",gap:32}}>
+          {[["$1.9M","Total Volume"],["8","Live Markets"],["24/7","AI Resolution"]].map(function(s){
+            return <div key={s[0]}>
+              <div style={{fontFamily:"DM Mono",fontSize:20,fontWeight:500,color:"#00e87a"}}>{s[0]}</div>
+              <div style={{color:"#3a3a60",fontSize:11,letterSpacing:".06em"}}>{s[1]}</div>
+            </div>;
+          })}
         </div>
+      </div>
 
-        {err !== "" && (
-          <div style={{color:"#ff3355", fontSize:12, fontFamily:"DM Mono", marginBottom:12}}>{err}</div>
-        )}
+      {/* Right panel - auth form */}
+      <div style={{width:440,display:"flex",alignItems:"center",justifyContent:"center",padding:32,position:"relative",zIndex:1}}>
+        <div style={{width:"100%",background:"#0b0b18",border:"1px solid #1a1a2e",borderRadius:20,padding:36,boxShadow:"0 0 80px #00e87a08"}}>
+          {/* Mode toggle */}
+          <div style={{display:"flex",background:"#07070f",borderRadius:10,padding:4,marginBottom:28,border:"1px solid #131328"}}>
+            {["login","register"].map(function(m){
+              return <button key={m} onClick={function(){ setMode(m); setErr(""); }}
+                style={{flex:1,padding:"9px",borderRadius:8,border:"none",background:mode===m?"#0e0e1c":"transparent",color:mode===m?"#ddddf0":"#3a3a60",fontFamily:"Syne",fontWeight:700,fontSize:12,letterSpacing:".06em",transition:"all .2s",boxShadow:mode===m?"0 0 20px #00e87a0a":"none"}}>
+                {m==="login" ? "Sign In" : "Register"}
+              </button>;
+            })}
+          </div>
 
-        <button className="auth-btn" onClick={handleClick}>
-          {mode === "login" ? "Sign In →" : "Create Account →"}
-        </button>
+          {mode==="register" && (
+            <div style={{marginBottom:16}}>
+              <label style={{color:"#3a3a60",fontSize:10,letterSpacing:".12em",display:"block",marginBottom:6}}>DISPLAY NAME</label>
+              <input style={{width:"100%",background:"#07070f",border:"1px solid #1a1a2e",borderRadius:10,color:"#ddddf0",padding:"13px 16px",fontSize:14,fontFamily:"Syne",transition:"border-color .2s",boxSizing:"border-box"}}
+                placeholder="SharpBettor99" value={dname}
+                onChange={function(e){ setDname(e.target.value); }}
+                onFocus={function(e){ e.target.style.borderColor="#00e87a44"; }}
+                onBlur={function(e){ e.target.style.borderColor="#1a1a2e"; }}/>
+            </div>
+          )}
 
-        <p style={{textAlign:"center", color:"#3a3a60", fontSize:11, marginTop:12}}>
-          <span style={{fontFamily:"DM Mono", color:"#00e87a"}}>demo</span> / <span style={{fontFamily:"DM Mono", color:"#00e87a"}}>demo</span>
-          &nbsp;·&nbsp;
-          <span style={{fontFamily:"DM Mono", color:"#b040ff"}}>admin</span> / <span style={{fontFamily:"DM Mono", color:"#b040ff"}}>vantage2026</span>
-        </p>
+          <div style={{marginBottom:16}}>
+            <label style={{color:"#3a3a60",fontSize:10,letterSpacing:".12em",display:"block",marginBottom:6}}>USERNAME</label>
+            <input style={{width:"100%",background:"#07070f",border:"1px solid #1a1a2e",borderRadius:10,color:"#ddddf0",padding:"13px 16px",fontSize:14,fontFamily:"Syne",transition:"border-color .2s",boxSizing:"border-box"}}
+              placeholder="username" value={uname}
+              onChange={function(e){ setUname(e.target.value); }}
+              onFocus={function(e){ e.target.style.borderColor="#00e87a44"; }}
+              onBlur={function(e){ e.target.style.borderColor="#1a1a2e"; }}
+              onKeyDown={function(e){ if(e.key==="Enter") handleClick(); }}/>
+          </div>
+
+          <div style={{marginBottom:20}}>
+            <label style={{color:"#3a3a60",fontSize:10,letterSpacing:".12em",display:"block",marginBottom:6}}>PASSWORD</label>
+            <input type="password" style={{width:"100%",background:"#07070f",border:"1px solid #1a1a2e",borderRadius:10,color:"#ddddf0",padding:"13px 16px",fontSize:14,fontFamily:"Syne",transition:"border-color .2s",boxSizing:"border-box"}}
+              placeholder="••••••••" value={pwd}
+              onChange={function(e){ setPwd(e.target.value); }}
+              onFocus={function(e){ e.target.style.borderColor="#00e87a44"; }}
+              onBlur={function(e){ e.target.style.borderColor="#1a1a2e"; }}
+              onKeyDown={function(e){ if(e.key==="Enter") handleClick(); }}/>
+          </div>
+
+          {err !== "" && (
+            <div style={{color:"#ff3355",fontSize:12,fontFamily:"DM Mono",marginBottom:16,padding:"8px 12px",background:"#1a0810",border:"1px solid #ff335522",borderRadius:8}}>{err}</div>
+          )}
+
+          <button onClick={handleClick}
+            style={{width:"100%",padding:"14px",borderRadius:12,border:"none",background:"linear-gradient(135deg,#00c060,#00e87a)",color:"#07070f",fontSize:14,fontFamily:"Syne",fontWeight:800,letterSpacing:".06em",cursor:"pointer",transition:"opacity .15s",marginBottom:20}}
+            onMouseEnter={function(e){ e.target.style.opacity=".88"; }}
+            onMouseLeave={function(e){ e.target.style.opacity="1"; }}>
+            {mode==="login" ? "Sign In →" : "Create Account →"}
+          </button>
+
+          <div style={{borderTop:"1px solid #131328",paddingTop:16,display:"flex",justifyContent:"center",gap:20}}>
+            {[["demo","demo","#00e87a"],["admin","vantage2026","#b040ff"]].map(function(c){
+              return <button key={c[0]} onClick={function(){ setUname(c[0]); setPwd(c[1]); setMode("login"); setErr(""); }}
+                style={{background:"transparent",border:"1px solid "+c[2]+"33",borderRadius:8,color:c[2],padding:"6px 14px",fontSize:11,fontFamily:"DM Mono",cursor:"pointer",transition:"all .15s"}}
+                onMouseEnter={function(e){ e.currentTarget.style.background=c[2]+"18"; }}
+                onMouseLeave={function(e){ e.currentTarget.style.background="transparent"; }}>
+                {c[0]}
+              </button>;
+            })}
+          </div>
+          <p style={{textAlign:"center",color:"#252540",fontSize:10,marginTop:10,fontFamily:"DM Mono"}}>click a button above to autofill credentials</p>
+        </div>
       </div>
     </div>
   );
@@ -732,8 +752,14 @@ function App(){
           })}
           {/* Fill last row so grid is always even */}
           {Array.from({length:(3-(filtered.length%3))%3}).map((_,i)=>(
-            <div key={`ph-${i}`} style={{background:'#0a0a18',border:'1px dashed #1a1a2e',borderRadius:12,minHeight:200,display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'none'}}>
-              <span style={{color:'#1a1a2e',fontSize:11,fontFamily:'DM Mono',letterSpacing:'.1em'}}>MORE COMING SOON</span>
+            <div key={`ph-${i}`} onClick={()=>setShowCreate(true)} style={{background:'#07070f',border:'1px dashed #00e87a33',borderRadius:12,minHeight:200,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:12,cursor:'pointer',transition:'all .2s'}}
+              onMouseEnter={e=>{e.currentTarget.style.border='1px dashed #00e87a88';e.currentTarget.style.background='#071510';}}
+              onMouseLeave={e=>{e.currentTarget.style.border='1px dashed #00e87a33';e.currentTarget.style.background='#07070f';}}>
+              <div style={{width:44,height:44,borderRadius:'50%',border:'1px dashed #00e87a44',display:'flex',alignItems:'center',justifyContent:'center',color:'#00e87a',fontSize:22}}>+</div>
+              <div style={{textAlign:'center'}}>
+                <div style={{color:'#00e87a',fontSize:12,fontWeight:700,letterSpacing:'.08em',marginBottom:4}}>CREATE MARKET</div>
+                <div style={{color:'#3a3a60',fontSize:11,fontFamily:'DM Mono'}}>Add your own prediction</div>
+              </div>
             </div>
           ))}
         </div>}
