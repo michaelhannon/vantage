@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0053)file:///Users/michael.hannon/Downloads/vantage_1.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html>
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VANTAGE — Prediction Markets</title>
 <style>
@@ -57,762 +57,762 @@ input:focus,textarea:focus,select:focus{outline:none}
 .auth-btn:hover{opacity:.88}
 .auth-btn:disabled{opacity:.5;cursor:not-allowed}
 </style>
-<script>"use strict";
+</head>
+<body>
+<div id="root"></div>
 
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-var _React = React,
-  useState = _React.useState,
-  useCallback = _React.useCallback,
-  useEffect = _React.useEffect,
-  useRef = _React.useRef,
-  useMemo = _React.useMemo;
-var PROXY_BASE = "https://vantage-production-2d1d.up.railway.app";
-var CATS = ["All", "Sports", "Politics", "Pop Culture", "Custom"];
-var CAT_STYLE = {
-  Sports: {
-    bg: '#071428',
-    c: '#4aa8ff'
-  },
-  Politics: {
-    bg: '#130a28',
-    c: '#b070ff'
-  },
-  'Pop Culture': {
-    bg: '#07201e',
-    c: '#30d8c0'
-  },
-  Custom: {
-    bg: '#1e1200',
-    c: '#f0a030'
-  }
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+const {useState,useCallback,useEffect,useRef,useMemo}=React;
+const PROXY_BASE = "https://vantage-production-2d1d.up.railway.app";
+const CATS=["All","Sports","Politics","Pop Culture","Custom"];
+const CAT_STYLE={
+  Sports:{bg:'#071428',c:'#4aa8ff'},
+  Politics:{bg:'#130a28',c:'#b070ff'},
+  'Pop Culture':{bg:'#07201e',c:'#30d8c0'},
+  Custom:{bg:'#1e1200',c:'#f0a030'}
 };
-var fmt = function fmt(n) {
-  return n >= 1e6 ? "$".concat((n / 1e6).toFixed(1), "M") : n >= 1000 ? "$".concat((n / 1000).toFixed(0), "K") : "$".concat(n);
-};
-var NID = 300;
+const fmt=n=>n>=1e6?`$${(n/1e6).toFixed(1)}M`:n>=1000?`$${(n/1000).toFixed(0)}K`:`$${n}`;
+let NID=300;
 
 // ── Persistent storage (localStorage for standalone file) ────────────────────
-var store = {
-  get: function get(key) {
-    try {
-      var v = localStorage.getItem(key);
-      return v ? {
-        value: v
-      } : null;
-    } catch (_unused) {
-      return null;
-    }
-  },
-  set: function set(key, val) {
-    try {
-      localStorage.setItem(key, val);
-      return true;
-    } catch (_unused2) {
-      return false;
-    }
-  }
+const store={
+  get:key=>{try{const v=localStorage.getItem(key);return v?{value:v}:null;}catch{return null;}},
+  set:(key,val)=>{try{localStorage.setItem(key,val);return true;}catch{return false;}},
 };
 
 // ── Admin credentials (change these!) ────────────────────────────────────────
-var ADMIN_USER = "admin";
-var ADMIN_PASS = "vantage2026";
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "vantage2026";
 
 // ── Anthropic API helper — routes through local proxy server ─────────────────
-var claude = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(messages) {
-    var _d$content;
-    var system,
-      body,
-      r,
-      d,
-      _args = arguments;
-    return _regenerator().w(function (_context) {
-      while (1) switch (_context.n) {
-        case 0:
-          system = _args.length > 1 && _args[1] !== undefined ? _args[1] : "";
-          body = {
-            model: "claude-sonnet-4-20250514",
-            max_tokens: 1000,
-            messages: messages
-          };
-          if (system) body.system = system;
-          _context.n = 1;
-          return fetch("".concat(PROXY_BASE, "/api/anthropic/messages"), {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-          });
-        case 1:
-          r = _context.v;
-          _context.n = 2;
-          return r.json();
-        case 2:
-          d = _context.v;
-          if (!d.error) {
-            _context.n = 3;
-            break;
-          }
-          throw new Error(d.error.message || JSON.stringify(d.error));
-        case 3:
-          return _context.a(2, ((_d$content = d.content) === null || _d$content === void 0 || (_d$content = _d$content[0]) === null || _d$content === void 0 ? void 0 : _d$content.text) || "");
-      }
-    }, _callee);
-  }));
-  return function claude(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-var INIT_MARKETS = [{
-  id: 1,
-  title: "Will the NY Yankees win the 2026 World Series?",
-  category: "Sports",
-  yp: 19,
-  vol: 284000,
-  close: "Oct 2026",
-  status: "open",
-  history: [19, 20, 18, 22, 19]
-}, {
-  id: 2,
-  title: "Will Trump's approval rating exceed 50% by end of 2026?",
-  category: "Politics",
-  yp: 42,
-  vol: 512000,
-  close: "Dec 2026",
-  status: "open",
-  history: [38, 40, 41, 44, 42]
-}, {
-  id: 3,
-  title: "Will Taylor Swift release a new album in 2026?",
-  category: "Pop Culture",
-  yp: 68,
-  vol: 198000,
-  close: "Dec 2026",
-  status: "open",
-  history: [60, 63, 65, 70, 68]
-}, {
-  id: 4,
-  title: "Will the Fed cut rates more than twice in 2026?",
-  category: "Politics",
-  yp: 56,
-  vol: 445000,
-  close: "Dec 2026",
-  status: "open",
-  history: [50, 52, 55, 57, 56]
-}, {
-  id: 5,
-  title: "Will the Miami Heat make the NBA playoffs in 2026?",
-  category: "Sports",
-  yp: 71,
-  vol: 88000,
-  close: "Apr 2026",
-  status: "open",
-  history: [65, 68, 70, 72, 71]
-}, {
-  id: 6,
-  title: "Will a Marvel film gross over $1B in 2026?",
-  category: "Pop Culture",
-  yp: 79,
-  vol: 134000,
-  close: "Dec 2026",
-  status: "open",
-  history: [72, 74, 76, 78, 79]
-}, {
-  id: 7,
-  title: "Will the Cowboys win the NFC East in 2026?",
-  category: "Sports",
-  yp: 38,
-  vol: 165000,
-  close: "Jan 2027",
-  status: "open",
-  history: [40, 39, 37, 38, 38]
-}, {
-  id: 8,
-  title: "Will Elon Musk lead a major company in 2027?",
-  category: "Custom",
-  yp: 88,
-  vol: 320000,
-  close: "Jan 2027",
-  status: "open",
-  history: [85, 86, 87, 89, 88]
-}];
+const claude=async(messages,system="")=>{
+  const body={model:"claude-sonnet-4-20250514",max_tokens:1000,messages};
+  if(system) body.system=system;
+  const r=await fetch(`${PROXY_BASE}/api/anthropic/messages`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(body)
+  });
+  const d=await r.json();
+  if(d.error) throw new Error(d.error.message||JSON.stringify(d.error));
+  return d.content?.[0]?.text||"";
+};
+
+const INIT_MARKETS=[
+  {id:1,title:"Will the NY Yankees win the 2026 World Series?",category:"Sports",yp:19,vol:284000,close:"Oct 2026",status:"open",history:[19,20,18,22,19]},
+  {id:2,title:"Will Trump's approval rating exceed 50% by end of 2026?",category:"Politics",yp:42,vol:512000,close:"Dec 2026",status:"open",history:[38,40,41,44,42]},
+  {id:3,title:"Will Taylor Swift release a new album in 2026?",category:"Pop Culture",yp:68,vol:198000,close:"Dec 2026",status:"open",history:[60,63,65,70,68]},
+  {id:4,title:"Will the Fed cut rates more than twice in 2026?",category:"Politics",yp:56,vol:445000,close:"Dec 2026",status:"open",history:[50,52,55,57,56]},
+  {id:5,title:"Will the Miami Heat make the NBA playoffs in 2026?",category:"Sports",yp:71,vol:88000,close:"Apr 2026",status:"open",history:[65,68,70,72,71]},
+  {id:6,title:"Will a Marvel film gross over $1B in 2026?",category:"Pop Culture",yp:79,vol:134000,close:"Dec 2026",status:"open",history:[72,74,76,78,79]},
+  {id:7,title:"Will the Cowboys win the NFC East in 2026?",category:"Sports",yp:38,vol:165000,close:"Jan 2027",status:"open",history:[40,39,37,38,38]},
+  {id:8,title:"Will Elon Musk lead a major company in 2027?",category:"Custom",yp:88,vol:320000,close:"Jan 2027",status:"open",history:[85,86,87,89,88]},
+];
 
 // ── Components ────────────────────────────────────────────────────────────────
-function Badge(_ref2) {
-  var cat = _ref2.cat;
-  var s = CAT_STYLE[cat] || {
-    bg: '#1a1a2e',
-    c: '#8888aa'
-  };
-  return /*#__PURE__*/React.createElement("span", {
-    style: {
-      background: s.bg,
-      color: s.c,
-      padding: '2px 8px',
-      borderRadius: '4px',
-      fontSize: '10px',
-      fontWeight: '700',
-      letterSpacing: '.07em',
-      textTransform: 'uppercase'
-    }
-  }, cat);
+function Badge({cat}){
+  const s=CAT_STYLE[cat]||{bg:'#1a1a2e',c:'#8888aa'};
+  return<span style={{background:s.bg,color:s.c,padding:'2px 8px',borderRadius:'4px',fontSize:'10px',fontWeight:'700',letterSpacing:'.07em',textTransform:'uppercase'}}>{cat}</span>;
 }
-function Sparkline(_ref3) {
-  var data = _ref3.data,
-    color = _ref3.color;
-  var ref = useRef(null);
-  var chartRef = useRef(null);
-  useEffect(function () {
-    if (!ref.current) return;
-    if (chartRef.current) chartRef.current.destroy();
-    chartRef.current = new Chart(ref.current, {
-      type: 'line',
-      data: {
-        labels: data.map(function (_, i) {
-          return i;
-        }),
-        datasets: [{
-          data: data,
-          borderColor: color,
-          borderWidth: 2,
-          pointRadius: 0,
-          fill: true,
-          backgroundColor: color + '18',
-          tension: .4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            enabled: false
-          }
-        },
-        scales: {
-          x: {
-            display: false
-          },
-          y: {
-            display: false
-          }
-        },
-        animation: {
-          duration: 600
-        }
+
+function Sparkline({data,color}){
+  const ref=useRef(null);const chartRef=useRef(null);
+  useEffect(()=>{
+    if(!ref.current) return;
+    if(chartRef.current) chartRef.current.destroy();
+    chartRef.current=new Chart(ref.current,{
+      type:'line',
+      data:{labels:data.map((_,i)=>i),datasets:[{data,borderColor:color,borderWidth:2,pointRadius:0,fill:true,backgroundColor:color+'18',tension:.4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}},animation:{duration:600}}
+    });
+    return()=>chartRef.current?.destroy();
+  },[data]);
+  return<canvas ref={ref} style={{height:48,width:'100%'}}/>;
+}
+
+function OddsChart({market}){
+  const ref=useRef(null);const chartRef=useRef(null);
+  useEffect(()=>{
+    if(!ref.current) return;
+    if(chartRef.current) chartRef.current.destroy();
+    const labels=market.history.map((_,i)=>`T-${market.history.length-1-i}`);
+    labels[labels.length-1]='Now';
+    chartRef.current=new Chart(ref.current,{
+      type:'line',
+      data:{labels,datasets:[
+        {label:'YES %',data:market.history,borderColor:'#00e87a',borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#00e87a',fill:true,backgroundColor:'#00e87a12',tension:.4},
+        {label:'NO %',data:market.history.map(v=>100-v),borderColor:'#ff3355',borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#ff3355',fill:true,backgroundColor:'#ff335512',tension:.4}
+      ]},
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{labels:{color:'#5a5a80',font:{size:11,family:'DM Mono'}}},tooltip:{backgroundColor:'#11111e',borderColor:'#2a2a48',borderWidth:1,titleColor:'#ddddf0',bodyColor:'#8888aa',titleFont:{family:'Syne',size:12},bodyFont:{family:'DM Mono',size:11},callbacks:{label:c=>`${c.dataset.label}: ${c.raw}¢`}}},
+        scales:{x:{ticks:{color:'#3a3a60',font:{family:'DM Mono',size:11}},grid:{color:'#131328'}},y:{min:0,max:100,ticks:{color:'#3a3a60',font:{family:'DM Mono',size:11},callback:v=>`${v}¢`},grid:{color:'#131328'}}},
+        animation:{duration:800}
       }
     });
-    return function () {
-      var _chartRef$current;
-      return (_chartRef$current = chartRef.current) === null || _chartRef$current === void 0 ? void 0 : _chartRef$current.destroy();
-    };
-  }, [data]);
-  return /*#__PURE__*/React.createElement("canvas", {
-    ref: ref,
-    style: {
-      height: 48,
-      width: '100%'
-    }
-  });
-}
-function OddsChart(_ref4) {
-  var market = _ref4.market;
-  var ref = useRef(null);
-  var chartRef = useRef(null);
-  useEffect(function () {
-    if (!ref.current) return;
-    if (chartRef.current) chartRef.current.destroy();
-    var labels = market.history.map(function (_, i) {
-      return "T-".concat(market.history.length - 1 - i);
-    });
-    labels[labels.length - 1] = 'Now';
-    chartRef.current = new Chart(ref.current, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'YES %',
-          data: market.history,
-          borderColor: '#00e87a',
-          borderWidth: 2.5,
-          pointRadius: 3,
-          pointBackgroundColor: '#00e87a',
-          fill: true,
-          backgroundColor: '#00e87a12',
-          tension: .4
-        }, {
-          label: 'NO %',
-          data: market.history.map(function (v) {
-            return 100 - v;
-          }),
-          borderColor: '#ff3355',
-          borderWidth: 2.5,
-          pointRadius: 3,
-          pointBackgroundColor: '#ff3355',
-          fill: true,
-          backgroundColor: '#ff335512',
-          tension: .4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            labels: {
-              color: '#5a5a80',
-              font: {
-                size: 11,
-                family: 'DM Mono'
-              }
-            }
-          },
-          tooltip: {
-            backgroundColor: '#11111e',
-            borderColor: '#2a2a48',
-            borderWidth: 1,
-            titleColor: '#ddddf0',
-            bodyColor: '#8888aa',
-            titleFont: {
-              family: 'Syne',
-              size: 12
-            },
-            bodyFont: {
-              family: 'DM Mono',
-              size: 11
-            },
-            callbacks: {
-              label: function label(c) {
-                return "".concat(c.dataset.label, ": ").concat(c.raw, "\xA2");
-              }
-            }
-          }
-        },
-        scales: {
-          x: {
-            ticks: {
-              color: '#3a3a60',
-              font: {
-                family: 'DM Mono',
-                size: 11
-              }
-            },
-            grid: {
-              color: '#131328'
-            }
-          },
-          y: {
-            min: 0,
-            max: 100,
-            ticks: {
-              color: '#3a3a60',
-              font: {
-                family: 'DM Mono',
-                size: 11
-              },
-              callback: function callback(v) {
-                return "".concat(v, "\xA2");
-              }
-            },
-            grid: {
-              color: '#131328'
-            }
-          }
-        },
-        animation: {
-          duration: 800
-        }
-      }
-    });
-    return function () {
-      var _chartRef$current2;
-      return (_chartRef$current2 = chartRef.current) === null || _chartRef$current2 === void 0 ? void 0 : _chartRef$current2.destroy();
-    };
-  }, [market]);
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: 200,
-      position: 'relative'
-    }
-  }, /*#__PURE__*/React.createElement("canvas", {
-    ref: ref
-  }));
+    return()=>chartRef.current?.destroy();
+  },[market]);
+  return<div style={{height:200,position:'relative'}}><canvas ref={ref}/></div>;
 }
 
 // ── Auth ─────────────────────────────────────────────────────────────────────
-function AuthScreen(_ref5) {
-  var onAuth = _ref5.onAuth;
-  var _React$useState = React.useState("login"),
-    _React$useState2 = _slicedToArray(_React$useState, 2),
-    mode = _React$useState2[0],
-    setMode = _React$useState2[1];
-  var _React$useState3 = React.useState(""),
-    _React$useState4 = _slicedToArray(_React$useState3, 2),
-    uname = _React$useState4[0],
-    setUname = _React$useState4[1];
-  var _React$useState5 = React.useState(""),
-    _React$useState6 = _slicedToArray(_React$useState5, 2),
-    pwd = _React$useState6[0],
-    setPwd = _React$useState6[1];
-  var _React$useState7 = React.useState(""),
-    _React$useState8 = _slicedToArray(_React$useState7, 2),
-    dname = _React$useState8[0],
-    setDname = _React$useState8[1];
-  var _React$useState9 = React.useState(""),
-    _React$useState0 = _slicedToArray(_React$useState9, 2),
-    err = _React$useState0[0],
-    setErr = _React$useState0[1];
-  function handleLogin() {
+function AuthScreen({onAuth}){
+  var [mode,setMode] = React.useState("login");
+  var [uname,setUname] = React.useState("");
+  var [pwd,setPwd] = React.useState("");
+  var [dname,setDname] = React.useState("");
+  var [err,setErr] = React.useState("");
+
+  function handleLogin(){
     var u = uname.trim();
     var p = pwd.trim();
-    if (u === "" || p === "") {
+    if(u === "" || p === ""){
       setErr("Please enter username and password");
       return;
     }
-    if (u === "admin" && p === "vantage2026") {
-      onAuth({
-        username: "admin",
-        name: "Admin",
-        balance: 0,
-        bets: 0,
-        wins: 0,
-        isAdmin: true
-      });
+    if(u === "admin" && p === "vantage2026"){
+      onAuth({username:"admin", name:"Admin", balance:0, bets:0, wins:0, isAdmin:true});
       return;
     }
-    if (u === "demo" && p === "demo") {
-      onAuth({
-        username: "demo",
-        name: "Demo Player",
-        balance: 2340.50,
-        bets: 18,
-        wins: 11,
-        isAdmin: false
-      });
+    if(u === "demo" && p === "demo"){
+      onAuth({username:"demo", name:"Demo Player", balance:2340.50, bets:18, wins:11, isAdmin:false});
       return;
     }
     try {
       var stored = localStorage.getItem("vantage_users");
       var users = stored ? JSON.parse(stored) : {};
-      if (!users[u] || users[u].pass !== p) {
+      if(!users[u] || users[u].pass !== p){
         setErr("Invalid username or password");
         return;
       }
-      onAuth(Object.assign({}, users[u], {
-        username: u,
-        isAdmin: false
-      }));
-    } catch (e) {
+      onAuth(Object.assign({}, users[u], {username:u, isAdmin:false}));
+    } catch(e) {
       setErr("Login error");
     }
   }
-  function handleRegister() {
+
+  function handleRegister(){
     var u = uname.trim();
     var p = pwd.trim();
     var n = dname.trim();
-    if (u === "" || p === "" || n === "") {
+    if(u === "" || p === "" || n === ""){
       setErr("Please fill in all fields");
       return;
     }
-    if (u === "admin" || u === "demo") {
+    if(u === "admin" || u === "demo"){
       setErr("That username is reserved");
       return;
     }
     try {
       var stored = localStorage.getItem("vantage_users");
       var users = stored ? JSON.parse(stored) : {};
-      if (users[u]) {
+      if(users[u]){
         setErr("Username already taken");
         return;
       }
-      users[u] = {
-        name: n,
-        pass: p,
-        balance: 1000,
-        bets: 0,
-        wins: 0,
-        totalPnl: 0
-      };
+      users[u] = {name:n, pass:p, balance:1000, bets:0, wins:0, totalPnl:0};
       localStorage.setItem("vantage_users", JSON.stringify(users));
-      onAuth(Object.assign({}, users[u], {
-        username: u,
-        isAdmin: false
-      }));
-    } catch (e) {
+      onAuth(Object.assign({}, users[u], {username:u, isAdmin:false}));
+    } catch(e) {
       setErr("Registration error");
     }
   }
-  function handleClick() {
+
+  function handleClick(){
     setErr("");
-    if (mode === "login") {
+    if(mode === "login"){
       handleLogin();
     } else {
       handleRegister();
     }
   }
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: 380,
-      margin: "60px auto",
-      padding: 20
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      textAlign: "center",
-      marginBottom: 32
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: "#00e87a",
-      fontSize: 32,
-      marginBottom: 8
-    }
-  }, "\u25C8"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 800,
-      fontSize: 22,
-      letterSpacing: ".14em"
-    }
-  }, "VANTAGE"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: "#3a3a60",
-      fontSize: 10,
-      letterSpacing: ".14em",
-      marginTop: 2
-    }
-  }, "PREDICTION MARKETS")), /*#__PURE__*/React.createElement("div", {
-    className: "modal",
-    style: {
-      margin: 0,
-      maxWidth: "100%"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      gap: 8,
-      marginBottom: 20
-    }
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: function onClick() {
-      setMode("login");
-      setErr("");
-    },
-    style: {
-      flex: 1,
-      padding: "9px",
-      borderRadius: 8,
-      border: "1px solid " + (mode === "login" ? "#00e87a44" : "#1a1a2e"),
-      background: mode === "login" ? "#071510" : "transparent",
-      color: mode === "login" ? "#00e87a" : "#4a4a6a",
-      fontFamily: "Syne",
-      fontWeight: 700,
-      fontSize: 12
-    }
-  }, "Sign In"), /*#__PURE__*/React.createElement("button", {
-    onClick: function onClick() {
-      setMode("register");
-      setErr("");
-    },
-    style: {
-      flex: 1,
-      padding: "9px",
-      borderRadius: 8,
-      border: "1px solid " + (mode === "register" ? "#00e87a44" : "#1a1a2e"),
-      background: mode === "register" ? "#071510" : "transparent",
-      color: mode === "register" ? "#00e87a" : "#4a4a6a",
-      fontFamily: "Syne",
-      fontWeight: 700,
-      fontSize: 12
-    }
-  }, "Register")), mode === "register" && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 12
-    }
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "field-label"
-  }, "DISPLAY NAME"), /*#__PURE__*/React.createElement("input", {
-    className: "auth-input",
-    placeholder: "SharpBettor99",
-    value: dname,
-    onChange: function onChange(e) {
-      setDname(e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 12
-    }
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "field-label"
-  }, "USERNAME"), /*#__PURE__*/React.createElement("input", {
-    className: "auth-input",
-    placeholder: "username",
-    value: uname,
-    onChange: function onChange(e) {
-      setUname(e.target.value);
-    },
-    onKeyDown: function onKeyDown(e) {
-      if (e.key === "Enter") handleClick();
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 16
-    }
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "field-label"
-  }, "PASSWORD"), /*#__PURE__*/React.createElement("input", {
-    className: "auth-input",
-    type: "password",
-    placeholder: "password",
-    value: pwd,
-    onChange: function onChange(e) {
-      setPwd(e.target.value);
-    },
-    onKeyDown: function onKeyDown(e) {
-      if (e.key === "Enter") handleClick();
-    }
-  })), err !== "" && /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: "#ff3355",
-      fontSize: 12,
-      fontFamily: "DM Mono",
-      marginBottom: 12
-    }
-  }, err), /*#__PURE__*/React.createElement("button", {
-    className: "auth-btn",
-    onClick: handleClick
-  }, mode === "login" ? "Sign In →" : "Create Account →"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      textAlign: "center",
-      color: "#3a3a60",
-      fontSize: 11,
-      marginTop: 12
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "DM Mono",
-      color: "#00e87a"
-    }
-  }, "demo"), " / ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "DM Mono",
-      color: "#00e87a"
-    }
-  }, "demo"), "\xA0\xB7\xA0", /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "DM Mono",
-      color: "#b040ff"
-    }
-  }, "admin"), " / ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: "DM Mono",
-      color: "#b040ff"
-    }
-  }, "vantage2026"))));
+
+  return (
+    <div style={{maxWidth:380, margin:"60px auto", padding:20}}>
+      <div style={{textAlign:"center", marginBottom:32}}>
+        <div style={{color:"#00e87a", fontSize:32, marginBottom:8}}>◈</div>
+        <div style={{fontWeight:800, fontSize:22, letterSpacing:".14em"}}>VANTAGE</div>
+        <div style={{color:"#3a3a60", fontSize:10, letterSpacing:".14em", marginTop:2}}>PREDICTION MARKETS</div>
+      </div>
+      <div className="modal" style={{margin:0, maxWidth:"100%"}}>
+        <div style={{display:"flex", gap:8, marginBottom:20}}>
+          <button
+            onClick={function(){ setMode("login"); setErr(""); }}
+            style={{flex:1, padding:"9px", borderRadius:8, border:"1px solid "+(mode==="login"?"#00e87a44":"#1a1a2e"), background:mode==="login"?"#071510":"transparent", color:mode==="login"?"#00e87a":"#4a4a6a", fontFamily:"Syne", fontWeight:700, fontSize:12}}>
+            Sign In
+          </button>
+          <button
+            onClick={function(){ setMode("register"); setErr(""); }}
+            style={{flex:1, padding:"9px", borderRadius:8, border:"1px solid "+(mode==="register"?"#00e87a44":"#1a1a2e"), background:mode==="register"?"#071510":"transparent", color:mode==="register"?"#00e87a":"#4a4a6a", fontFamily:"Syne", fontWeight:700, fontSize:12}}>
+            Register
+          </button>
+        </div>
+
+        {mode === "register" && (
+          <div style={{marginBottom:12}}>
+            <label className="field-label">DISPLAY NAME</label>
+            <input className="auth-input" placeholder="SharpBettor99" value={dname} onChange={function(e){ setDname(e.target.value); }}/>
+          </div>
+        )}
+
+        <div style={{marginBottom:12}}>
+          <label className="field-label">USERNAME</label>
+          <input className="auth-input" placeholder="username" value={uname}
+            onChange={function(e){ setUname(e.target.value); }}
+            onKeyDown={function(e){ if(e.key==="Enter") handleClick(); }}/>
+        </div>
+
+        <div style={{marginBottom:16}}>
+          <label className="field-label">PASSWORD</label>
+          <input className="auth-input" type="password" placeholder="password" value={pwd}
+            onChange={function(e){ setPwd(e.target.value); }}
+            onKeyDown={function(e){ if(e.key==="Enter") handleClick(); }}/>
+        </div>
+
+        {err !== "" && (
+          <div style={{color:"#ff3355", fontSize:12, fontFamily:"DM Mono", marginBottom:12}}>{err}</div>
+        )}
+
+        <button className="auth-btn" onClick={handleClick}>
+          {mode === "login" ? "Sign In →" : "Create Account →"}
+        </button>
+
+        <p style={{textAlign:"center", color:"#3a3a60", fontSize:11, marginTop:12}}>
+          <span style={{fontFamily:"DM Mono", color:"#00e87a"}}>demo</span> / <span style={{fontFamily:"DM Mono", color:"#00e87a"}}>demo</span>
+          &nbsp;·&nbsp;
+          <span style={{fontFamily:"DM Mono", color:"#b040ff"}}>admin</span> / <span style={{fontFamily:"DM Mono", color:"#b040ff"}}>vantage2026</span>
+        </p>
+      </div>
+    </div>
+  );
 }
-function CreateMarketModal(_ref6) {
-  var onClose = _ref6.onClose,
-    onCreated = _ref6.onCreated;
-  var _useState = useState('ai'),
-    _useState2 = _slicedToArray(_useState, 2),
-    mode = _useState2[0],
-    setMode = _useState2[1];
-  var _useState3 = useState(''),
-    _useState4 = _slicedToArray(_useState3, 2),
-    topic = _useState4[0],
-    setTopic = _useState4[1];
-  var _useState5 = useState(''),
-    _useState6 = _slicedToArray(_useState5, 2),
-    title = _useState6[0],
-    setTitle = _useState6[1];
-  var _useState7 = useState('Custom'),
-    _useState8 = _slicedToArray(_useState7, 2),
-    cat = _useState8[0],
-    setCat = _useState8[1];
-  var _useState9 = useState(50),
-    _useState0 = _slicedToArray(_useState9, 2),
-    yp = _useState0[0],
-    setYp = _useState0[1];
-  var _useState1 = useState('Dec 2026'),
-    _useState10 = _slicedToArray(_useState1, 2),
-    close = _useState10[0],
-    setClose = _useState10[1];
-  var _useState11 = useState(false),
-    _useState12 = _slicedToArray(_useState11, 2),
-    creating = _useState12[0],
-    setCreating = _useState12[1];
-  var _useState13 = useState(''),
-    _useState14 = _slicedToArray(_useState13, 2),
-    err = _useState14[0],
-    setErr = _useState14[1];
-  var aiCreate = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-      var txt, m, _t;
-      return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.p = _context2.n) {
-          case 0:
-            if (topic.trim()) {
-              _context2.n = 1;
-              break;
-            }
-            return _context2.a(2);
-          case 1:
-            setCreating(true);
-            setErr('');
-            _context2.p = 2;
-            _context2.n = 3;
-            return claude([{
-              role: "user",
-              content: "Create a prediction market about: \"".concat(topic, "\"\nReturn ONLY JSON (no markdown):\n{\"title\":\"specific yes/no question\",\"category\":\"Sports|Politics|Pop Culture|Custom\",\"yesPrice\":45,\"closeDate\":\"Mon Year\",\"volume\":75000,\"rationale\":\"why this is interesting in 1 sentence\"}")
-            }]);
-          case 3:
-            txt = _context2.v;
-            m = JSON.parse(txt.replace(/```json|```/g, "").trim());
-            onCreated({
-              id: NID++,
-              title: m.title,
-              category: m.category,
-              yp: m.yesPrice,
-              vol: m.volume,
-              close: m.closeDate,
-              status: "open",
-              history: [m.yesPrice],
-              rationale: m.rationale
-            });
-            onClose();
-            _context2.n = 5;
-            break;
-          case 4:
-            _context2.p = 4;
-            _t = _context2.v;
-            setErr('Generation failed — check your API key');
-          case 5:
-            setCreating(false);
-          case 6:
-            return _context2.a(2);
-        }
-      }, _callee2, null, [[2, 4]]);
+
+
+function CreateMarketModal({onClose,onCreated}){
+  const [mode,setMode]=useState('ai');
+  const [topic,setTopic]=useState('');
+  const [title,setTitle]=useState('');
+  const [cat,setCat]=useState('Custom');
+  const [yp,setYp]=useState(50);
+  const [close,setClose]=useState('Dec 2026');
+  const [creating,setCreating]=useState(false);
+  const [err,setErr]=useState('');
+
+  const aiCreate=async()=>{
+    if(!topic.trim()) return;
+    setCreating(true);setErr('');
+    try{
+      const txt=await claude([{role:"user",content:`Create a prediction market about: "${topic}"\nReturn ONLY JSON (no markdown):\n{"title":"specific yes/no question","category":"Sports|Politics|Pop Culture|Custom","yesPrice":45,"closeDate":"Mon Year","volume":75000,"rationale":"why this is interesting in 1 sentence"}`}]);
+      const m=JSON.parse(txt.replace(/```json|```/g,"").trim());
+      onCreated({id:NID++,title:m.title,category:m.category,yp:m.yesPrice,vol:m.volume,close:m.closeDate,status:"open",history:[m.yesPrice],rationale:m.rationale});
+      onClose();
+    }catch(e){setErr('Generation failed — check your API key');}
+    setCreating(false);
+  };
+
+  const manualCreate=()=>{
+    if(!title.trim()) return;
+    onCreated({id:NID++,title,category:cat,yp:Number(yp),vol:10000,close,status:"open",history:[Number(yp)]});
+    onClose();
+  };
+
+  return<div className="modal-overlay" onClick={onClose}>
+    <div className="modal" style={{maxWidth:480}} onClick={e=>e.stopPropagation()}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:18}}>
+        <span style={{fontWeight:700,fontSize:17,color:'#b040ff'}}>Create Market</span>
+        <button onClick={onClose} style={{background:'none',border:'none',color:'#4a4a6a',fontSize:18}}>✕</button>
+      </div>
+      <div style={{display:'flex',gap:8,marginBottom:20}}>
+        {['ai','manual'].map(m=><button key={m} onClick={()=>setMode(m)} style={{flex:1,padding:'8px',borderRadius:8,border:`1px solid ${mode===m?'#b040ff44':'#1a1a2e'}`,background:mode===m?'#120010':'transparent',color:mode===m?'#b040ff':'#4a4a6a',fontFamily:'Syne',fontWeight:700,fontSize:12,letterSpacing:'.06em',transition:'all .15s'}}>{m==='ai'?'⚡ AI-Powered':'✏ Manual'}</button>)}
+      </div>
+      {mode==='ai'?<>
+        <label className="field-label">DESCRIBE YOUR MARKET IDEA</label>
+        <textarea className="field-input" placeholder="e.g. Will Bitcoin hit $200k before end of 2026? Or: Something about the 2026 midterm elections..." value={topic} onChange={e=>setTopic(e.target.value)} rows={4} style={{resize:'vertical',lineHeight:1.6,marginBottom:16}}/>
+        {err&&<div style={{color:'#ff3355',fontSize:12,fontFamily:'DM Mono',marginBottom:12}}>{err}</div>}
+        <button style={{width:'100%',padding:12,borderRadius:10,border:'none',background:'#b040ff',color:'#fff',fontSize:14,fontFamily:'Syne',fontWeight:800,letterSpacing:'.04em',opacity:creating||!topic.trim()?0.5:1,transition:'opacity .15s'}} onClick={aiCreate} disabled={creating||!topic.trim()}>
+          {creating?<span style={{animation:'pulse 1s infinite'}}>Generating…</span>:'Generate Market →'}
+        </button>
+      </>:<>
+        <div style={{marginBottom:12}}>
+          <label className="field-label">MARKET QUESTION (YES/NO)</label>
+          <input className="field-input" placeholder="Will X happen by Y date?" value={title} onChange={e=>setTitle(e.target.value)}/>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12,marginBottom:12}}>
+          <div>
+            <label className="field-label">CATEGORY</label>
+            <select className="select-inp" value={cat} onChange={e=>setCat(e.target.value)}>
+              {["Sports","Politics","Pop Culture","Custom"].map(c=><option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="field-label">CLOSE DATE</label>
+            <input className="field-input" placeholder="Dec 2026" value={close} onChange={e=>setClose(e.target.value)}/>
+          </div>
+        </div>
+        <div style={{marginBottom:20}}>
+          <div style={{display:'flex',justifyContent:'space-between',marginBottom:8}}>
+            <label className="field-label" style={{margin:0}}>STARTING YES PRICE</label>
+            <span style={{fontFamily:'DM Mono',fontSize:13,color:'#00e87a'}}>{yp}¢</span>
+          </div>
+          <input type="range" className="range-inp" min={5} max={95} value={yp} onChange={e=>setYp(e.target.value)}/>
+        </div>
+        <button style={{width:'100%',padding:12,borderRadius:10,border:'none',background:'#b040ff',color:'#fff',fontSize:14,fontFamily:'Syne',fontWeight:800,letterSpacing:'.04em',opacity:!title.trim()?0.5:1,transition:'opacity .15s'}} onClick={manualCreate} disabled={!title.trim()}>
+          Create Market →
+        </button>
+      </>}
+    </div>
+  </div>;
+}
+
+function Leaderboard({currentUser}){
+  const [board,setBoard]=useState([]);
+  const [loading,setLoading]=useState(true);
+  useEffect(()=>{
+    try{
+      const r=store.get('vantage_users');
+      if(r){
+        const users=JSON.parse(r.value);
+        const rows=Object.entries(users).map(([un,u])=>({username:un,name:u.name||un,balance:u.balance||1000,pnl:((u.balance||1000)-1000),bets:u.bets||0,wins:u.wins||0}));
+        rows.sort((a,b)=>b.balance-a.balance);
+        setBoard(rows);
+      }
+    }catch(e){setBoard([]);}
+    setLoading(false);
+  },[currentUser?.balance]);
+
+  const medals=['🥇','🥈','🥉'];
+  if(loading) return<div style={{color:'#3a3a60',textAlign:'center',padding:40,fontFamily:'DM Mono',fontSize:13}}>Loading leaderboard…</div>;
+  if(!board.length) return<div style={{color:'#2a2a48',textAlign:'center',padding:60,fontSize:14}}>No players yet — register to appear here!</div>;
+
+  return<>
+    <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10,marginBottom:20}}>
+      {[['PLAYERS',board.length],['AVG BALANCE',`$${Math.round(board.reduce((s,r)=>s+r.balance,0)/board.length).toLocaleString()}`],['TOTAL BETS',board.reduce((s,r)=>s+r.bets,0)]].map(([l,v])=>(
+        <div key={l} style={{background:'#0e0e1c',border:'1px solid #1a1a2e',borderRadius:8,padding:'12px 14px',textAlign:'center'}}>
+          <div style={{color:'#3a3a60',fontSize:10,letterSpacing:'.1em',marginBottom:4}}>{l}</div>
+          <div style={{fontFamily:'DM Mono',fontSize:16,fontWeight:500}}>{v}</div>
+        </div>
+      ))}
+    </div>
+    {board.map((row,i)=>{
+      const isMe=row.username===currentUser?.username;
+      const pnlClr=row.pnl>=0?'#00e87a':'#ff3355';
+      return<div key={row.username} className={`lb-row${isMe?' me':''}`} style={{animationDelay:`${i*60}ms`}}>
+        <div style={{width:32,textAlign:'center',fontSize:i<3?16:13,color:i<3?'#ddddf0':'#3a3a60',fontFamily:'DM Mono',fontWeight:500}}>{i<3?medals[i]:i+1}</div>
+        <div style={{width:34,height:34,borderRadius:'50%',background:isMe?'#071510':'#131328',border:`1px solid ${isMe?'#00e87a33':'#1a1a2e'}`,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:12,color:isMe?'#00e87a':'#5a5a80',marginRight:12,flexShrink:0}}>{row.name.substring(0,2).toUpperCase()}</div>
+        <div style={{flex:1,minWidth:0}}>
+          <div style={{fontSize:13,fontWeight:700,color:isMe?'#ddddf0':'#aaaacc'}}>{row.name}{isMe&&<span style={{color:'#00e87a',fontSize:10,marginLeft:8}}>YOU</span>}</div>
+          <div style={{color:'#3a3a60',fontSize:11,fontFamily:'DM Mono'}}>{row.bets} bets · {row.wins} wins</div>
+        </div>
+        <div style={{textAlign:'right',flexShrink:0}}>
+          <div style={{fontFamily:'DM Mono',fontWeight:500,fontSize:15}}>${row.balance.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+          <div style={{fontFamily:'DM Mono',fontSize:11,color:pnlClr}}>{row.pnl>=0?'+':''}{row.pnl.toFixed(2)}</div>
+        </div>
+      </div>;
+    })}
+  </>;
+}
+
+
+// ── Admin Panel ───────────────────────────────────────────────────────────────
+function AdminPanel({markets,setMarkets,onResolve,resolvingId}){
+  const [users,setUsers]=useState({});
+  const [editBal,setEditBal]=useState({});
+  const [editPass,setEditPass]=useState({});
+  const [msg,setMsg]=useState('');
+
+  useEffect(()=>{
+    try{const r=store.get('vantage_users');if(r) setUsers(JSON.parse(r.value));}catch(e){}
+  },[]);
+
+  const saveUsers=u=>{
+    store.set('vantage_users',JSON.stringify(u));
+    setUsers({...u});
+  };
+
+  const adjustBalance=(un,amt)=>{
+    const a=parseFloat(amt);if(isNaN(a)) return;
+    const u={...users};u[un]={...u[un],balance:Math.max(0,parseFloat(((u[un].balance||0)+a).toFixed(2)))};
+    saveUsers(u);setMsg(`Updated ${un} balance`);setTimeout(()=>setMsg(''),2000);
+  };
+
+  const resetPass=(un,np)=>{
+    if(!np.trim()) return;
+    const u={...users};u[un]={...u[un],pass:np};
+    saveUsers(u);setEditPass(p=>({...p,[un]:''}));setMsg(`Reset ${un} password`);setTimeout(()=>setMsg(''),2000);
+  };
+
+  const deleteUser=un=>{
+    const u={...users};delete u[un];
+    saveUsers(u);setMsg(`Deleted ${un}`);setTimeout(()=>setMsg(''),2000);
+  };
+
+  const deleteMarket=id=>{
+    setMarkets(prev=>prev.filter(m=>m.id!==id));
+    setMsg('Market deleted');setTimeout(()=>setMsg(''),2000);
+  };
+
+  const totalVol=markets.reduce((s,m)=>s+m.vol,0);
+  const totalUsers=Object.keys(users).length;
+  const totalBets=Object.values(users).reduce((s,u)=>s+(u.bets||0),0);
+  const totalBalance=Object.values(users).reduce((s,u)=>s+(u.balance||0),0);
+
+  return<>
+    {msg&&<div style={{background:'#071510',border:'1px solid #00e87a44',borderRadius:8,padding:'8px 14px',marginBottom:16,color:'#00e87a',fontFamily:'DM Mono',fontSize:12}}>{msg}</div>}
+
+    {/* Platform Stats */}
+    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(120px,1fr))',gap:10,marginBottom:24}}>
+      {[['USERS',totalUsers,'#b040ff'],['TOTAL BETS',totalBets,'#4aa8ff'],['MARKET VOL',`$${(totalVol/1000).toFixed(0)}K`,'#f0c040'],['PLAYER FUNDS',`$${totalBalance.toFixed(0)}`,'#00e87a'],['OPEN MARKETS',markets.filter(m=>m.status==='open').length,'#30d8c0'],['RESOLVED',markets.filter(m=>m.status==='resolved').length,'#5a5a80']].map(([l,v,c])=>(
+        <div key={l} style={{background:'#0e0e1c',border:'1px solid #1a1a2e',borderRadius:8,padding:'12px',textAlign:'center'}}>
+          <div style={{color:'#3a3a60',fontSize:9,letterSpacing:'.1em',marginBottom:4}}>{l}</div>
+          <div style={{fontFamily:'DM Mono',fontSize:15,fontWeight:500,color:c}}>{v}</div>
+        </div>
+      ))}
+    </div>
+
+    {/* User Management */}
+    <div style={{marginBottom:24}}>
+      <div style={{color:'#b040ff',fontSize:11,letterSpacing:'.1em',fontWeight:700,marginBottom:12}}>USER MANAGEMENT</div>
+      {Object.keys(users).length===0?<div style={{color:'#2a2a48',fontSize:13}}>No users yet.</div>:
+      Object.entries(users).map(([un,u])=>(
+        <div key={un} style={{background:'#0e0e1c',border:'1px solid #1a1a2e',borderRadius:10,padding:'12px 14px',marginBottom:8}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+            <div>
+              <span style={{fontWeight:700,fontSize:13}}>{u.name||un}</span>
+              <span style={{fontFamily:'DM Mono',color:'#4a4a6a',fontSize:11,marginLeft:8}}>@{un}</span>
+            </div>
+            <div style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap'}}>
+              <span style={{fontFamily:'DM Mono',color:'#00e87a',fontSize:13}}>${(u.balance||0).toFixed(2)}</span>
+              <span style={{color:'#3a3a60',fontSize:11}}>{u.bets||0} bets · {u.wins||0} wins</span>
+            </div>
+          </div>
+          <div style={{display:'flex',gap:6,marginTop:10,flexWrap:'wrap'}}>
+            <input placeholder="Adjust $" value={editBal[un]||''} onChange={e=>setEditBal(b=>({...b,[un]:e.target.value}))} style={{background:'#07070f',border:'1px solid #2a2a48',borderRadius:6,color:'#ddddf0',padding:'5px 10px',fontSize:12,fontFamily:'DM Mono',width:90}}/>
+            <button onClick={()=>adjustBalance(un,editBal[un]||'0')} style={{background:'transparent',border:'1px solid #00e87a44',borderRadius:6,color:'#00e87a',padding:'5px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>Apply</button>
+            <input placeholder="New password" type="password" value={editPass[un]||''} onChange={e=>setEditPass(p=>({...p,[un]:e.target.value}))} style={{background:'#07070f',border:'1px solid #2a2a48',borderRadius:6,color:'#ddddf0',padding:'5px 10px',fontSize:12,fontFamily:'DM Mono',width:120}}/>
+            <button onClick={()=>resetPass(un,editPass[un]||'')} style={{background:'transparent',border:'1px solid #4aa8ff44',borderRadius:6,color:'#4aa8ff',padding:'5px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>Reset Pass</button>
+            <button onClick={()=>{if(window.confirm(`Delete user ${un}?`)) deleteUser(un);}} style={{background:'transparent',border:'1px solid #ff335544',borderRadius:6,color:'#ff3355',padding:'5px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>Delete</button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Market Management */}
+    <div>
+      <div style={{color:'#b040ff',fontSize:11,letterSpacing:'.1em',fontWeight:700,marginBottom:12}}>MARKET MANAGEMENT</div>
+      {markets.map(m=>(
+        <div key={m.id} style={{background:'#0e0e1c',border:'1px solid #1a1a2e',borderRadius:10,padding:'12px 14px',marginBottom:8,display:'flex',justifyContent:'space-between',alignItems:'center',gap:10,flexWrap:'wrap'}}>
+          <div style={{flex:1,minWidth:200}}>
+            <div style={{marginBottom:4}}><Badge cat={m.category}/><span style={{marginLeft:8,fontSize:10,fontFamily:'DM Mono',color:m.status==='open'?'#00e87a':'#5a5a80'}}>{m.status.toUpperCase()}</span></div>
+            <p style={{fontSize:12,lineHeight:1.4,fontWeight:600}}>{m.title}</p>
+          </div>
+          <div style={{display:'flex',gap:6}}>
+            {m.status==='open'&&<button onClick={()=>onResolve(m)} disabled={resolvingId===m.id} style={{background:'transparent',border:'1px solid #f0c04044',borderRadius:6,color:'#f0c040',padding:'6px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>{resolvingId===m.id?'…':'⚡ Resolve'}</button>}
+            <button onClick={()=>{if(window.confirm('Delete this market?')) deleteMarket(m.id);}} style={{background:'transparent',border:'1px solid #ff335544',borderRadius:6,color:'#ff3355',padding:'6px 10px',fontSize:11,fontFamily:'Syne',fontWeight:700}}>Delete</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </>;
+}
+
+function App(){
+  const [user,setUser]=useState(null);
+  const [markets,setMarkets]=useState(INIT_MARKETS);
+  const [cat,setCat]=useState("All");
+  const [tab,setTab]=useState("markets");
+  const [betModal,setBetModal]=useState(null);
+  const [chartModal,setChartModal]=useState(null);
+  const [betAmt,setBetAmt]=useState("50");
+  const [betSide,setBetSide]=useState("YES");
+  const [generating,setGenerating]=useState(false);
+  const [resolvingId,setResolvingId]=useState(null);
+  const [resolved,setResolved]=useState({});
+  const [showCreate,setShowCreate]=useState(false);
+  const [notif,setNotif]=useState(null);
+  const [positions,setPositions]=useState({});
+  const notifTimer=useRef(null);
+
+  const notify=(msg,type="ok")=>{
+    if(notifTimer.current) clearTimeout(notifTimer.current);
+    setNotif({msg,type});
+    notifTimer.current=setTimeout(()=>setNotif(null),3200);
+  };
+
+  const saveUser=u=>{
+    try{
+      const r=store.get('vantage_users');
+      let users={};if(r) users=JSON.parse(r.value);
+      users[u.username]={name:u.name,pass:users[u.username]?.pass||'',balance:u.balance,bets:u.bets||0,wins:u.wins||0,totalPnl:u.totalPnl||0};
+      store.set('vantage_users',JSON.stringify(users));
+    }catch(e){}
+  };
+
+  const handleAuth=u=>{
+    // Seed demo account if missing
+    try{
+      const r=store.get('vantage_users');let us={};if(r) us=JSON.parse(r.value);
+      if(!us.demo){us.demo={name:'Demo Player',pass:'demo',balance:2340.50,bets:18,wins:11,totalPnl:340.50};store.set('vantage_users',JSON.stringify(us));}
+    }catch(e){}
+    setUser(u);
+  };
+
+  const openBet=(market,side)=>{setBetModal(market);setBetSide(side);setBetAmt("50");};
+
+  const placeBet=()=>{
+    if(!betModal||!user) return;
+    const amt=parseFloat(betAmt);
+    if(!amt||amt<=0){notify("Enter a valid amount","err");return;}
+    if(amt>user.balance){notify("Insufficient balance","err");return;}
+    const price=betSide==="YES"?betModal.yp:100-betModal.yp;
+    const shares=(amt/(price/100));
+    const nu={...user,balance:parseFloat((user.balance-amt).toFixed(2)),bets:(user.bets||0)+1};
+    setUser(nu);saveUser(nu);
+    setPositions(prev=>{
+      const k=betModal.id;const ex=prev[k];
+      if(ex&&ex.side===betSide){
+        const ns=ex.shares+shares;
+        const nap=((ex.avgPrice*ex.shares)+(price*shares))/ns;
+        return{...prev,[k]:{side:betSide,shares:ns,avgPrice:nap,invested:(ex.invested||0)+amt}};
+      }
+      return{...prev,[k]:{side:betSide,shares,avgPrice:price,invested:amt}};
+    });
+    setMarkets(prev=>prev.map(m=>{
+      if(m.id!==betModal.id) return m;
+      const d=Math.round(Math.random()*2)+1;
+      const ny=betSide==="YES"?Math.min(95,m.yp+d):Math.max(5,m.yp-d);
+      const nh=[...(m.history||[m.yp]),ny].slice(-12);
+      return{...m,yp:ny,vol:m.vol+amt,history:nh};
     }));
-    return function aiCreate() {
+    setBetModal(null);
+    notify(`${shares.toFixed(1)} ${betSide} shares @ ${price}¢`);
+  };
+
+  const resolveMarket=async(market)=>{
+    setResolvingId(market.id);
+    try{
+      const txt=await claude([{role:"user",content:`Resolve this prediction market as of March 14, 2026: "${market.title}"\nReturn ONLY JSON: {"outcome":"YES" or "NO" or "N/A","reasoning":"1-2 sentences","confidence":"high|medium|low"}`}]);
+      const result=JSON.parse(txt.replace(/```json|```/g,"").trim());
+      const pos=positions[market.id];
+      if(pos&&result.outcome!=="N/A"){
+        if(pos.side===result.outcome){
+          const payout=pos.shares;
+          const nu={...user,balance:parseFloat((user.balance+payout).toFixed(2)),wins:(user.wins||0)+1};
+          setUser(nu);saveUser(nu);
+          notify(`Resolved ${result.outcome} — you won $${payout.toFixed(2)}!`);
+        } else {
+          saveUser(user);
+          notify(`Resolved ${result.outcome} — better luck next time.`,"err");
+        }
+        setPositions(prev=>{const n={...prev};delete n[market.id];return n;});
+      } else {notify(`Market resolved: ${result.outcome}`);}
+      setResolved(prev=>({...prev,[market.id]:result}));
+      setMarkets(prev=>prev.map(m=>m.id===market.id?{...m,status:"resolved"}:m));
+    }catch(e){console.error(e);notify("Resolution failed — check API key","err");}
+    setResolvingId(null);
+  };
+
+  const aiGenerate=async()=>{
+    setGenerating(true);
+    try{
+      const txt=await claude([{role:"user",content:`Generate 3 interesting, resolvable prediction markets for 2026. Mix categories. Return ONLY JSON array (no markdown):\n[{"title":"...","category":"Sports|Politics|Pop Culture|Custom","yesPrice":45,"closeDate":"Mon Year","volume":50000}]`}]);
+      const arr=JSON.parse(txt.replace(/```json|```/g,"").trim());
+      setMarkets(prev=>[...arr.map(m=>({id:NID++,title:m.title,category:m.category,yp:m.yesPrice,vol:m.volume,close:m.closeDate,status:"open",history:[m.yesPrice]})),...prev]);
+      notify(`${arr.length} new markets added!`);
+    }catch(e){notify("Generation failed — check API key","err");}
+    setGenerating(false);
+  };
+
+  const filtered=cat==="All"?markets.filter(m=>m.status==="open"):markets.filter(m=>m.category===cat&&m.status==="open");
+  const myPos=Object.entries(positions).map(([id,p])=>{const m=markets.find(x=>x.id===Number(id));return m?{...p,market:m}:null}).filter(Boolean);
+  const resolvedList=markets.filter(m=>m.status==="resolved");
+
+  if(!user) return<AuthScreen onAuth={handleAuth}/>;
+
+  return<>
+    {notif&&<div className={`notif ${notif.type}`}>{notif.msg}</div>}
+    {showCreate&&<CreateMarketModal onClose={()=>setShowCreate(false)} onCreated={m=>{setMarkets(prev=>[m,...prev]);notify(`Market created!`);}}/>}
+
+    {chartModal&&<div className="modal-overlay" onClick={()=>setChartModal(null)}>
+      <div className="modal" style={{maxWidth:500}} onClick={e=>e.stopPropagation()}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
+          <Badge cat={chartModal.category}/>
+          <button onClick={()=>setChartModal(null)} style={{background:'none',border:'none',color:'#4a4a6a',fontSize:18}}>✕</button>
+        </div>
+        <p style={{fontSize:13,fontWeight:600,lineHeight:1.5,marginBottom:16,color:'#ddddf0'}}>{chartModal.title}</p>
+        <OddsChart market={chartModal}/>
+        <div style={{display:'flex',gap:6,marginTop:16}}>
+          <button className="yes-btn" onClick={()=>{setChartModal(null);openBet(chartModal,'YES');}}>BET YES</button>
+          <button className="no-btn" onClick={()=>{setChartModal(null);openBet(chartModal,'NO');}}>BET NO</button>
+        </div>
+      </div>
+    </div>}
+
+    {/* HEADER */}
+    <div style={{borderBottom:'1px solid #131328',padding:'0 16px',height:54,display:'flex',alignItems:'center',position:'sticky',top:0,background:'#07070f',zIndex:50}}>
+      <div style={{maxWidth:1100,width:'100%',margin:'0 auto',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+        <div style={{display:'flex',alignItems:'center',gap:8}}>
+          <div style={{color:'#00e87a',fontSize:18}}>◈</div>
+          <div>
+            <div style={{fontWeight:800,fontSize:13,letterSpacing:'.14em'}}>VANTAGE</div>
+            <div style={{fontSize:8,letterSpacing:'.1em',color:'#252540'}}>PREDICTION MARKETS</div>
+          </div>
+        </div>
+        <div style={{display:'flex',alignItems:'center',gap:10}}>
+          <div style={{textAlign:'right'}}>
+            {user.isAdmin?<div style={{color:'#b040ff',fontFamily:'DM Mono',fontWeight:700,fontSize:12,letterSpacing:'.08em'}}>ADMIN</div>:<><div style={{color:'#3a3a60',fontSize:9,letterSpacing:'.1em'}}>BALANCE</div><div style={{color:'#00e87a',fontFamily:'DM Mono',fontWeight:500,fontSize:14}}>${user.balance.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div></>}
+          </div>
+          <div style={{width:32,height:32,borderRadius:'50%',background:user.isAdmin?'#12001e':'#071510',border:`1px solid ${user.isAdmin?'#b040ff55':'#00e87a33'}`,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:11,color:user.isAdmin?'#b040ff':'#00e87a'}}>{user.isAdmin?'⬡':(user.name||user.username).substring(0,2).toUpperCase()}</div>
+          <button onClick={()=>setUser(null)} style={{background:'none',border:'1px solid #1a1a2e',borderRadius:6,color:'#3a3a60',padding:'4px 8px',fontSize:11}}>↩</button>
+        </div>
+      </div>
+    </div>
+
+    {/* TABS */}
+    <div style={{borderBottom:'1px solid #131328',padding:'0 16px',display:'flex',maxWidth:1132,margin:'0 auto',overflowX:'auto'}}>
+      {[["markets","◈ Markets"],["portfolio","◉ Portfolio"],["leaderboard","⬆ Leaders"],["resolved","✓ Resolved"],...(user.isAdmin?[["admin","⬡ Admin"]]:[])].map(([k,l])=>(
+        <button key={k} className={`tab${tab===k?" active":""}`} onClick={()=>setTab(k)}>{l}</button>
+      ))}
+    </div>
+
+    <div style={{maxWidth:1100,margin:'0 auto',padding:'18px 16px'}}>
+
+      {/* MARKETS */}
+      {tab==="markets"&&<>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16,flexWrap:'wrap',gap:8}}>
+          <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
+            {CATS.map(c=><button key={c} className={`filter-btn${cat===c?" active":""}`} onClick={()=>setCat(c)}>{c}</button>)}
+          </div>
+          <div style={{display:'flex',gap:6}}>
+            <button className="create-btn" onClick={()=>setShowCreate(true)}>+ Create</button>
+            <button className="gen-btn" disabled={generating} onClick={aiGenerate}>
+              {generating?<span style={{animation:'pulse 1s infinite'}}>◌ …</span>:"⚡ AI Generate"}
+            </button>
+          </div>
+        </div>
+        {filtered.length===0?<div style={{color:'#2a2a48',textAlign:'center',padding:'60px 0',fontSize:14}}>No markets — create one or hit AI Generate!</div>:
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(min(280px,100%),1fr))',gap:12,gridAutoRows:'auto'}}>
+          {filtered.map(m=>{
+            const np=100-m.yp;const pos=positions[m.id];
+            return<div key={m.id} className="card">
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
+                <Badge cat={m.category}/>
+                <span style={{color:'#252540',fontFamily:'DM Mono',fontSize:10}}>{m.close}</span>
+              </div>
+              <p style={{color:'#ddddf0',fontSize:12,lineHeight:1.5,marginBottom:6,fontWeight:600,minHeight:36}}>{m.title}</p>
+              {m.history&&m.history.length>1&&<div style={{marginBottom:8,cursor:'pointer'}} onClick={()=>setChartModal(m)} title="View full chart">
+                <Sparkline data={m.history} color="#00e87a"/>
+              </div>}
+              <div style={{height:3,background:'#1a0810',borderRadius:2,marginBottom:7,overflow:'hidden'}}>
+                <div style={{height:'100%',width:`${m.yp}%`,background:'linear-gradient(90deg,#00e87a,#00c060)',borderRadius:2,transition:'width .4s ease'}}/>
+              </div>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
+                <div style={{display:'flex',gap:10}}>
+                  <span style={{color:'#00e87a',fontFamily:'DM Mono',fontSize:12,fontWeight:500}}>YES {m.yp}¢</span>
+                  <span style={{color:'#ff3355',fontFamily:'DM Mono',fontSize:12,fontWeight:500}}>NO {np}¢</span>
+                </div>
+                <span style={{color:'#252540',fontFamily:'DM Mono',fontSize:10}}>Vol {fmt(m.vol)}</span>
+              </div>
+              {pos&&<div style={{background:'#071510',border:'1px solid #00e87a22',borderRadius:6,padding:'5px 10px',marginBottom:8,display:'flex',justifyContent:'space-between',fontSize:11}}>
+                <span style={{color:'#3a6050'}}>My position:</span>
+                <span style={{fontFamily:'DM Mono',color:pos.side==='YES'?'#00e87a':'#ff3355'}}>{pos.side} · {pos.shares.toFixed(1)} shares</span>
+              </div>}
+              <div style={{display:'flex',gap:5}}>
+                <button className="yes-btn" onClick={()=>openBet(m,'YES')}>YES</button>
+                <button className="no-btn" onClick={()=>openBet(m,'NO')}>NO</button>
+                <button className="resolve-btn" onClick={()=>resolveMarket(m)} disabled={resolvingId===m.id} title="AI Resolve">
+                  {resolvingId===m.id?<span style={{animation:'pulse 1s infinite'}}>…</span>:"⚡"}
+                </button>
+                <button className="resolve-btn" onClick={()=>setChartModal(m)} title="View chart" style={{color:'#00e87a55',borderColor:'#00e87a22'}}>▲</button>
+              </div>
+            </div>;
+          })}
+          {/* Fill last row so grid is always even */}
+          {Array.from({length:(3-(filtered.length%3))%3}).map((_,i)=>(
+            <div key={`ph-${i}`} style={{visibility:'hidden',pointerEvents:'none',minHeight:1,borderRadius:12}}/>
+          ))}
+        </div>}
+      </>}
+
+      {/* PORTFOLIO */}
+      {tab==="portfolio"&&<>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(120px,1fr))',gap:10,marginBottom:18}}>
+          {[['BALANCE',`$${user.balance.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`,'#ddddf0'],['OPEN BETS',myPos.length,'#ddddf0'],['TOTAL BETS',user.bets||0,'#ddddf0'],['WINS',user.wins||0,'#00e87a'],['INVESTED',`$${myPos.reduce((s,p)=>s+(p.invested||0),0).toFixed(2)}`,'#f0c040']].map(([l,v,c])=>(
+            <div key={l} style={{background:'#0e0e1c',border:'1px solid #1a1a2e',borderRadius:8,padding:'12px',textAlign:'center'}}>
+              <div style={{color:'#3a3a60',fontSize:9,letterSpacing:'.1em',marginBottom:4}}>{l}</div>
+              <div style={{fontFamily:'DM Mono',fontSize:14,fontWeight:500,color:c}}>{v}</div>
+            </div>
+          ))}
+        </div>
+        {myPos.length===0?<div style={{color:'#2a2a48',textAlign:'center',padding:'60px 0',fontSize:14}}>No open positions yet.</div>:
+        myPos.map(p=><div key={p.market.id} className="card" style={{marginBottom:10,display:'flex',justifyContent:'space-between',alignItems:'center',gap:12,flexWrap:'wrap'}}>
+          <div style={{flex:1,minWidth:200}}>
+            <div style={{marginBottom:6}}><Badge cat={p.market.category}/></div>
+            <p style={{fontSize:12,lineHeight:1.5,marginBottom:8,fontWeight:600}}>{p.market.title}</p>
+            <div style={{display:'flex',gap:14,flexWrap:'wrap'}}>
+              {[['SIDE',<span style={{color:p.side==='YES'?'#00e87a':'#ff3355',fontFamily:'DM Mono',fontWeight:500,fontSize:13}}>{p.side}</span>],['SHARES',<span style={{fontFamily:'DM Mono',fontSize:13}}>{p.shares.toFixed(1)}</span>],['AVG',<span style={{fontFamily:'DM Mono',fontSize:13}}>{p.avgPrice.toFixed(0)}¢</span>],['IN',<span style={{fontFamily:'DM Mono',fontSize:13,color:'#f0c040'}}>${(p.invested||0).toFixed(2)}</span>]].map(([lbl,val])=><div key={lbl}><div style={{color:'#3a3a60',fontSize:9,letterSpacing:'.08em',marginBottom:2}}>{lbl}</div>{val}</div>)}
+            </div>
+          </div>
+          <div style={{textAlign:'right'}}>
+            <div style={{color:'#3a3a60',fontSize:9,letterSpacing:'.1em',marginBottom:2}}>CURRENT</div>
+            <div style={{fontFamily:'DM Mono',fontSize:17,fontWeight:500,color:p.side==='YES'?'#00e87a':'#ff3355'}}>{p.side==='YES'?p.market.yp:100-p.market.yp}¢</div>
+            <div style={{fontFamily:'DM Mono',fontSize:11,color:p.side==='YES'?(p.market.yp>p.avgPrice?'#00e87a':'#ff3355'):(100-p.market.yp>p.avgPrice?'#00e87a':'#ff3355')}}>{(((p.side==='YES'?p.market.yp:100-p.market.yp)-p.avgPrice)/p.avgPrice*100).toFixed(1)}%</div>
+          </div>
+        </div>)}
+      </>}
+
+      {/* LEADERBOARD */}
+      {tab==="leaderboard"&&<Leaderboard currentUser={user}/>}
+
+      {/* RESOLVED */}
+      {tab==="resolved"&&<>
+        {resolvedList.length===0?<div style={{color:'#2a2a48',textAlign:'center',padding:'60px 0',fontSize:14}}>No resolved markets yet — hit ⚡ on any market!</div>:
+        resolvedList.map(m=>{
+          const res=resolved[m.id];if(!res) return null;
+          const oc=res.outcome;
+          const oclr=oc==='YES'?'#00e87a':oc==='NO'?'#ff3355':'#f0c040';
+          const ocbg=oc==='YES'?'#071510':oc==='NO'?'#150710':'#120e00';
+          return<div key={m.id} className="card" style={{marginBottom:10}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8}}>
+              <Badge cat={m.category}/>
+              <span style={{color:oclr,background:ocbg,border:`1px solid ${oclr}44`,padding:'3px 10px',borderRadius:4,fontFamily:'DM Mono',fontWeight:500,fontSize:11}}>{oc} · {res.confidence}</span>
+            </div>
+            <p style={{fontSize:12,lineHeight:1.5,fontWeight:600,marginBottom:8}}>{m.title}</p>
+            <p style={{color:'#5a5a80',fontSize:11,lineHeight:1.6,borderLeft:'2px solid #1a1a2e',paddingLeft:10}}>{res.reasoning}</p>
+          </div>;
+        })}
+      </>}
+    </div>
+
+    {/* BET MODAL */}
+    {betModal&&<div className="modal-overlay" onClick={()=>setBetModal(null)}>
+      <div className="modal" onClick={e=>e.stopPropagation()}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
+          <span style={{fontWeight:700,fontSize:16}}>Place Bet</span>
+          <button onClick={()=>setBetModal(null)} style={{background:'none',border:'none',color:'#4a4a6a',fontSize:18}}>✕</button>
+        </div>
+        <p style={{color:'#5a5a80',fontSize:12,lineHeight:1.5,marginBottom:14}}>{betModal.title}</p>
+        <div style={{display:'flex',gap:8,marginBottom:16}}>
+          {['YES','NO'].map(s=>{const price=s==='YES'?betModal.yp:100-betModal.yp;const active=betSide===s;const clr=s==='YES'?'#00e87a':'#ff3355';const abg=s==='YES'?'#071510':'#150710';return<button key={s} onClick={()=>setBetSide(s)} style={{flex:1,padding:'10px 8px',borderRadius:8,border:`2px solid ${active?clr:`${clr}33`}`,background:active?abg:'transparent',color:clr,fontFamily:'DM Mono',fontWeight:500,fontSize:14,transition:'all .15s'}}>{s} · {price}¢</button>;})}
+        </div>
+        <label className="field-label">AMOUNT ($)</label>
+        <input type="number" className="bet-input" value={betAmt} onChange={e=>setBetAmt(e.target.value)} placeholder="0" style={{marginBottom:8}}/>
+        <div style={{display:'flex',gap:6,marginBottom:14}}>
+          {[10,25,50,100,250].map(a=><button key={a} className="quick" onClick={()=>setBetAmt(String(Math.min(a,user.balance)))}>${a}</button>)}
+        </div>
+        {parseFloat(betAmt)>0&&<div style={{background:'#07070f',border:'1px solid #131328',borderRadius:8,padding:'10px 14px',marginBottom:14}}>
+          {[['Shares',(parseFloat(betAmt)/((betSide==='YES'?betModal.yp:100-betModal.yp)/100)).toFixed(1)],['Payout if correct',`$${(parseFloat(betAmt)/((betSide==='YES'?betModal.yp:100-betModal.yp)/100)).toFixed(2)}`],['Balance after',`$${Math.max(0,user.balance-parseFloat(betAmt)).toFixed(2)}`]].map(([l,v])=><div key={l} style={{display:'flex',justifyContent:'space-between',marginBottom:3,fontSize:12}}><span style={{color:'#4a4a6a'}}>{l}</span><span style={{fontFamily:'DM Mono'}}>{v}</span></div>)}
+        </div>}
+        <button className={betSide==='YES'?'confirm-yes':'confirm-no'} onClick={placeBet}>Confirm · {betSide}</button>
+      </div>
+    </div>}
+  </>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
