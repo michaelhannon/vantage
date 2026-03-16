@@ -1,0 +1,17 @@
+{
+  "name": "vantage-proxy",
+  "version": "1.0.0",
+  "description": "Anthropic proxy server for Vantage prediction markets",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npx nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "https-proxy-agent": "^7.0.2",
+    "node-fetch": "^3.3.2"
+  }
+}
