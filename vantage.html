@@ -460,272 +460,65 @@ function OddsChart(_ref4) {
     ref: ref
   }));
 }
-function AuthScreen(_ref5) {
-  var onAuth = _ref5.onAuth;
-  var _useState = useState('login'),
-    _useState2 = _slicedToArray(_useState, 2),
-    mode = _useState2[0],
-    setMode = _useState2[1];
-  var _useState3 = useState(''),
-    _useState4 = _slicedToArray(_useState3, 2),
-    name = _useState4[0],
-    setName = _useState4[1];
-  var _useState5 = useState(''),
-    _useState6 = _slicedToArray(_useState5, 2),
-    user = _useState6[0],
-    setUser = _useState6[1];
-  var _useState7 = useState(''),
-    _useState8 = _slicedToArray(_useState7, 2),
-    pass = _useState8[0],
-    setPass = _useState8[1];
-  var _useState9 = useState(''),
-    _useState0 = _slicedToArray(_useState9, 2),
-    err = _useState0[0],
-    setErr = _useState0[1];
-  var _useState1 = useState(false),
-    _useState10 = _slicedToArray(_useState1, 2),
-    loading = _useState10[0],
-    setLoading = _useState10[1];
-  var submit = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-      var r, users, _t;
-      return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.p = _context2.n) {
-          case 0:
-            if (!(!user.trim() || !pass.trim())) {
-              _context2.n = 1;
-              break;
-            }
-            setErr('Fill in all fields');
-            return _context2.a(2);
-          case 1:
-            if (!(mode === 'register' && !name.trim())) {
-              _context2.n = 2;
-              break;
-            }
-            setErr('Enter a display name');
-            return _context2.a(2);
-          case 2:
-            setLoading(true);
-            setErr('');
-            _context2.p = 3;
-            r = store.get('vantage_users');
-            users = {};
-            if (r) users = JSON.parse(r.value);
-            if (!(mode === 'register')) {
-              _context2.n = 5;
-              break;
-            }
-            if (!users[user]) {
-              _context2.n = 4;
-              break;
-            }
-            setErr('Username taken');
-            setLoading(false);
-            return _context2.a(2);
-          case 4:
-            users[user] = {
-              name: name || user,
-              pass: pass,
-              balance: 1000,
-              totalPnl: 0,
-              bets: 0,
-              wins: 0
-            };
-            store.set('vantage_users', JSON.stringify(users));
-            onAuth(_objectSpread({
-              username: user
-            }, users[user]));
-            _context2.n = 8;
-            break;
-          case 5:
-            if (!(user === ADMIN_USER && pass === ADMIN_PASS)) {
-              _context2.n = 6;
-              break;
-            }
-            onAuth({
-              username: ADMIN_USER,
-              name: 'Admin',
-              balance: 0,
-              bets: 0,
-              wins: 0,
-              isAdmin: true
-            });
-            setLoading(false);
-            return _context2.a(2);
-          case 6:
-            if (!(!users[user] || users[user].pass !== pass)) {
-              _context2.n = 7;
-              break;
-            }
-            setErr('Invalid credentials');
-            setLoading(false);
-            return _context2.a(2);
-          case 7:
-            onAuth(_objectSpread({
-              username: user
-            }, users[user]));
-          case 8:
-            _context2.n = 10;
-            break;
-          case 9:
-            _context2.p = 9;
-            _t = _context2.v;
-            setErr('Storage error — try again');
-          case 10:
-            setLoading(false);
-          case 11:
-            return _context2.a(2);
-        }
-      }, _callee2, null, [[3, 9]]);
-    }));
-    return function submit() {
-      return _ref6.apply(this, arguments);
-    };
-  }();
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: 380,
-      margin: '60px auto',
-      padding: 20
+function AuthScreen({onAuth}){
+  const [mode,setMode]=React.useState("login");
+  const [uname,setUname]=React.useState("");
+  const [pwd,setPwd]=React.useState("");
+  const [dname,setDname]=React.useState("");
+  const [err,setErr]=React.useState("");
+  function go(){
+    var u=uname.trim(), p=pwd.trim();
+    if(!u || !p){ setErr("Enter username and password"); return; }
+    if(mode==="login"){
+      if(u==="admin" && p==="vantage2026"){ onAuth({username:"admin",name:"Admin",balance:0,bets:0,wins:0,isAdmin:true}); return; }
+      if(u==="demo" && p==="demo"){ onAuth({username:"demo",name:"Demo Player",balance:2340.50,bets:18,wins:11,isAdmin:false}); return; }
+      try{
+        var us=JSON.parse(localStorage.getItem("vantage_users") || "{}");
+        if(!us[u] || us[u].pass!==p){ setErr("Invalid credentials"); return; }
+        onAuth(Object.assign({username:u,isAdmin:false}, us[u]));
+      }catch(e){ setErr("Error: "+e.message); }
+    } else {
+      var n=dname.trim();
+      if(!n){ setErr("Enter display name"); return; }
+      try{
+        var us2=JSON.parse(localStorage.getItem("vantage_users") || "{}");
+        if(us2[u]){ setErr("Username taken"); return; }
+        us2[u]={name:n,pass:p,balance:1000,bets:0,wins:0,totalPnl:0};
+        localStorage.setItem("vantage_users", JSON.stringify(us2));
+        onAuth(Object.assign({username:u,isAdmin:false}, us2[u]));
+      }catch(e){ setErr("Error: "+e.message); }
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      textAlign: 'center',
-      marginBottom: 32
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: '#00e87a',
-      fontSize: 32,
-      marginBottom: 8
-    }
-  }, "\u25C8"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 800,
-      fontSize: 22,
-      letterSpacing: '.14em'
-    }
-  }, "VANTAGE"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: '#3a3a60',
-      fontSize: 10,
-      letterSpacing: '.14em',
-      marginTop: 2
-    }
-  }, "PREDICTION MARKETS")), /*#__PURE__*/React.createElement("div", {
-    className: "modal",
-    style: {
-      margin: 0,
-      maxWidth: '100%'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 8,
-      marginBottom: 20
-    }
-  }, ['login', 'register'].map(function (m) {
-    return /*#__PURE__*/React.createElement("button", {
-      key: m,
-      onClick: function onClick() {
-        setMode(m);
-        setErr('');
-      },
-      style: {
-        flex: 1,
-        padding: '9px',
-        borderRadius: 8,
-        border: "1px solid ".concat(mode === m ? '#00e87a44' : '#1a1a2e'),
-        background: mode === m ? '#071510' : 'transparent',
-        color: mode === m ? '#00e87a' : '#4a4a6a',
-        fontFamily: 'Syne',
-        fontWeight: 700,
-        fontSize: 12,
-        letterSpacing: '.06em',
-        transition: 'all .15s'
-      }
-    }, m === 'login' ? 'Sign In' : 'Register');
-  })), mode === 'register' && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 12
-    }
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "field-label"
-  }, "DISPLAY NAME"), /*#__PURE__*/React.createElement("input", {
-    className: "auth-input",
-    placeholder: "e.g. SharpBettor99",
-    value: name,
-    onChange: function onChange(e) {
-      return setName(e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 12
-    }
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "field-label"
-  }, "USERNAME"), /*#__PURE__*/React.createElement("input", {
-    className: "auth-input",
-    placeholder: "username",
-    value: user,
-    onChange: function onChange(e) {
-      return setUser(e.target.value);
-    },
-    onKeyDown: function onKeyDown(e) {
-      return e.key === 'Enter' && submit();
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 16
-    }
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "field-label"
-  }, "PASSWORD"), /*#__PURE__*/React.createElement("input", {
-    className: "auth-input",
-    type: "password",
-    placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
-    value: pass,
-    onChange: function onChange(e) {
-      return setPass(e.target.value);
-    },
-    onKeyDown: function onKeyDown(e) {
-      return e.key === 'Enter' && submit();
-    }
-  })), err && /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: '#ff3355',
-      fontSize: 12,
-      fontFamily: 'DM Mono',
-      marginBottom: 12
-    }
-  }, err), /*#__PURE__*/React.createElement("button", {
-    className: "auth-btn",
-    onClick: submit,
-    disabled: loading
-  }, loading ? /*#__PURE__*/React.createElement("span", {
-    style: {
-      animation: 'pulse 1s infinite'
-    }
-  }, "...") : mode === 'login' ? 'Sign In →' : 'Create Account →'), /*#__PURE__*/React.createElement("p", {
-    style: {
-      textAlign: 'center',
-      color: '#3a3a60',
-      fontSize: 11,
-      marginTop: 12
-    }
-  }, "Try demo: ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'DM Mono',
-      color: '#00e87a'
-    }
-  }, "demo"), " / ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'DM Mono',
-      color: '#00e87a'
-    }
-  }, "demo"), " \u2014 or register your own account")));
+  }
+  return(
+    <div style={{maxWidth:380,margin:"60px auto",padding:20}}>
+      <div style={{textAlign:"center",marginBottom:32}}>
+        <div style={{color:"#00e87a",fontSize:32,marginBottom:8}}>◈</div>
+        <div style={{fontWeight:800,fontSize:22,letterSpacing:".14em"}}>VANTAGE</div>
+        <div style={{color:"#3a3a60",fontSize:10,letterSpacing:".14em",marginTop:2}}>PREDICTION MARKETS</div>
+      </div>
+      <div className="modal" style={{margin:0,maxWidth:"100%"}}>
+        <div style={{display:"flex",gap:8,marginBottom:20}}>
+          <button onClick={()=>{setMode("login");setErr("");}} style={{flex:1,padding:"9px",borderRadius:8,border:"1px solid "+(mode==="login"?"#00e87a44":"#1a1a2e"),background:mode==="login"?"#071510":"transparent",color:mode==="login"?"#00e87a":"#4a4a6a",fontFamily:"Syne",fontWeight:700,fontSize:12}}>Sign In</button>
+          <button onClick={()=>{setMode("register");setErr("");}} style={{flex:1,padding:"9px",borderRadius:8,border:"1px solid "+(mode==="register"?"#00e87a44":"#1a1a2e"),background:mode==="register"?"#071510":"transparent",color:mode==="register"?"#00e87a":"#4a4a6a",fontFamily:"Syne",fontWeight:700,fontSize:12}}>Register</button>
+        </div>
+        {mode==="register" && <div style={{marginBottom:12}}><label className="field-label">DISPLAY NAME</label><input className="auth-input" placeholder="SharpBettor99" value={dname} onChange={e=>setDname(e.target.value)}/></div>}
+        <div style={{marginBottom:12}}>
+          <label className="field-label">USERNAME</label>
+          <input className="auth-input" placeholder="username" value={uname} onChange={e=>setUname(e.target.value)} onKeyDown={e=>e.key==="Enter" && go()}/>
+        </div>
+        <div style={{marginBottom:16}}>
+          <label className="field-label">PASSWORD</label>
+          <input className="auth-input" type="password" placeholder="password" value={pwd} onChange={e=>setPwd(e.target.value)} onKeyDown={e=>e.key==="Enter" && go()}/>
+        </div>
+        {err && <div style={{color:"#ff3355",fontSize:12,fontFamily:"DM Mono",marginBottom:12}}>{err}</div>}
+        <button className="auth-btn" onClick={go}>{mode==="login" ? "Sign In ->" : "Create Account ->"}</button>
+        <p style={{textAlign:"center",color:"#3a3a60",fontSize:11,marginTop:12}}>demo / demo · admin / vantage2026</p>
+      </div>
+    </div>
+  );
 }
+
+
 function CreateMarketModal(_ref7) {
   var onClose = _ref7.onClose,
     onCreated = _ref7.onCreated;
