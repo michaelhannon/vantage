@@ -694,7 +694,7 @@ function App(){
           </div>
         </div>
         {filtered.length===0?<div style={{color:'#2a2a48',textAlign:'center',padding:'60px 0',fontSize:14}}>No markets — create one or hit AI Generate!</div>:
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(min(280px,100%),1fr))',gap:12,gridAutoRows:'auto'}}>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}}>
           {filtered.map(m=>{
             const np=100-m.yp;const pos=positions[m.id];
             return<div key={m.id} className="card">
@@ -732,7 +732,7 @@ function App(){
           })}
           {/* Fill last row so grid is always even */}
           {Array.from({length:(3-(filtered.length%3))%3}).map((_,i)=>(
-            <div key={`ph-${i}`} style={{visibility:'hidden',pointerEvents:'none',minHeight:1,borderRadius:12}}/>
+            <div key={`ph-${i}`} style={{visibility:'hidden',pointerEvents:'none',background:'transparent',border:'none',borderRadius:12,minHeight:100}}/>
           ))}
         </div>}
       </>}
