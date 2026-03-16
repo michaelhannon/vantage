@@ -2761,7 +2761,7 @@ function AuthScreen({onAuth}){
   const [err,setErr]=useState('');
   const [loading,setLoading]=useState(false);
 
-  const submit=async()=>{
+  const submit=()=>{
     if(!user.trim()||!pass.trim()){setErr('Fill in all fields');return;}
     if(mode==='register'&&!name.trim()){setErr('Enter a display name');return;}
     setLoading(true);setErr('');
@@ -2776,7 +2776,7 @@ function AuthScreen({onAuth}){
         onAuth({username:user,...users[user]});
       } else {
         // Check admin credentials first
-        if(user===ADMIN_USER&&pass===ADMIN_PASS){
+        if(u===ADMIN_USER&&p===ADMIN_PASS){
           onAuth({username:ADMIN_USER,name:'Admin',balance:0,bets:0,wins:0,isAdmin:true});
           setLoading(false);return;
         }
